@@ -2,6 +2,7 @@
 const roomGrid = document.getElementById('room-grid');
 const roundEl = document.getElementById('round-count');
 const balanceEl = document.getElementById('balance');
+const activeTokensEl = document.getElementById('active-tokens');
 const healthyEl = document.getElementById('healthy-count');
 const infectedEl = document.getElementById('infected-count');
 const healthyBar = document.getElementById('healthy-bar');
@@ -78,6 +79,7 @@ class Person {
         this.predicted = !this.predicted;
         this.updateDOM();
         logTerminal(this.predicted ? "> Sujeto bajo vigilancia remota." : "> Vigilancia cancelada.");
+        updateActiveTokens();
     }
 
     move() {
@@ -110,6 +112,11 @@ function logTerminal(msg, color = null) {
     if (terminal.childNodes.length > 10) terminal.removeChild(terminal.firstChild);
 }
 
+function updateActiveTokens() {
+    const active = population.filter(p => p.predicted).length;
+    activeTokensEl.innerText = active;
+}
+
 function initGame() {
     roomGrid.innerHTML = '';
     terminal.innerHTML = '';
@@ -131,6 +138,7 @@ function initGame() {
     }
     updateAtRisk();
     updateStats();
+    updateActiveTokens();
     nextBtn.disabled = false;
     logTerminal("> PROTOCOLO BIO-DYNAMO ACTIVADO.");
 }
@@ -138,6 +146,10 @@ function initGame() {
 function updateStats() {
     roundEl.innerText = round;
     balanceEl.innerText = balance;
+    
+    // Actualizar color del balance
+    balanceEl.className = balance > 0 ? 'profit' : (balance < 0 ? 'loss' : '');
+
     const healthy = population.filter(p => p.status === 'healthy').length;
     const infected = population.filter(p => p.status === 'infected').length;
     healthyEl.innerText = healthy;
@@ -206,7 +218,7 @@ async function runRound() {
         }
     }
 
-    // 3. Evaluar Créditos
+    // 3. Evaluar Tokens
     let win = 0, loss = 0;
     population.forEach(p => {
         if (p.predicted) {
@@ -218,6 +230,7 @@ async function runRound() {
             p.predicted = false; 
         }
     });
+    updateActiveTokens();
 
     newInfections.forEach(h => {
         h.status = 'infected';
@@ -231,8 +244,8 @@ async function runRound() {
     } else {
         logTerminal("> Escaneo completado: Sin nuevos focos.");
     }
-    if (win > 0) logTerminal(`> CRÉDITOS OBTENIDOS: +${win}`, "var(--safe-green)");
-    if (loss > 0) logTerminal(`> CRÉDITOS EXTRAÍDOS: -${loss}`, "var(--danger-red)");
+    if (win > 0) logTerminal(`> TOKENS OBTENIDOS: +${win}`, "var(--safe-green)");
+    if (loss > 0) logTerminal(`> TOKENS EXTRAÍDOS: -${loss}`, "var(--danger-red)");
 
     round++;
     isSimulating = false;
