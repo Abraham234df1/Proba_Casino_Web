@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monte Carlo Simulator - Proba Casino</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/juego8.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">PROBA<span>CASINO</span></div>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="catalogo.html">Juegos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="game-header">
+            <h1>Simulador Monte Carlo</h1>
+            <p class="myth-box">"El azar es impredecible..." <br><strong>¿Y si lanzamos la moneda 10,000 veces?</strong></p>
+        </section>
+
+        <div class="game-layout">
+            <div class="game-main">
+                <div class="sim-controls">
+                    <h3>Poder de Procesamiento</h3>
+                    <p>Simula miles de eventos instantáneamente para ver la convergencia.</p>
+                    <div class="action-buttons" style="margin-top: 20px;">
+                        <button id="sim-100" class="btn-secondary">Lanzar 100</button>
+                        <button id="sim-1000" class="btn-primary">Lanzar 1,000</button>
+                        <button id="sim-10000" class="btn-danger" style="background: #ffb703; color: black;">Lanzar 10,000</button>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <div id="chart-area" class="chart-area">
+                        <!-- Visualización de convergencia -->
+                        <div id="convergence-line" class="convergence-line"></div>
+                        <div id="data-points" class="data-points"></div>
+                    </div>
+                    <div class="chart-labels">
+                        <span>0</span>
+                        <span>Progreso de Simulaciones</span>
+                        <span id="max-label">10000</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-stats">
+                <div class="stat-card">
+                    <h3>Total Lanzamientos</h3>
+                    <div id="stat-total" class="stat-value">0</div>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Frecuencia de Cara</h3>
+                    <div id="stat-heads-perc" class="stat-value">0%</div>
+                    <p>Objetivo Teórico: 50%</p>
+                </div>
+
+                <div id="msg-box" class="info-bubble">
+                    Usa el simulador para ver cómo, a mayor volumen de datos, la probabilidad real se ajusta perfectamente a la teoría.
+                </div>
+                
+                <button id="reset-sim" class="btn-secondary" style="width: 100%;">Limpiar Datos</button>
+            </div>
+        </div>
+
+        <section class="edu-footer">
+            <div class="edu-content">
+                <h3>La Ley de los Grandes Números</h3>
+                <p>Este simulador utiliza el Método de Monte Carlo. Demuestra que aunque un solo lanzamiento es impredecible, el promedio de una gran cantidad de lanzamientos es muy predecible. Cuantos más datos tenemos, menos impacto tiene la suerte individual y más brilla la matemática pura.</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="assets/js/juego8.js"></script>
+</body>
+</html>

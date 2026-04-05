@@ -1,0 +1,97 @@
+.box-container {
+    width: 250px;
+    height: 250px;
+    margin: 3rem auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loot-box {
+    font-size: 8rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+}
+
+.loot-box:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.loot-box.opening {
+    animation: openBox 0.5s ease-in-out;
+}
+
+@keyframes openBox {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.4) rotate(-10deg); }
+    100% { transform: scale(1); opacity: 0; }
+}
+
+.reward-display {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: white;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    animation: popReward 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 5px solid #ccc;
+    z-index: 5;
+}
+
+.reward-display.hidden { display: none; }
+
+@keyframes popReward {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.reward-icon {
+    font-size: 5rem;
+    margin-bottom: 10px;
+}
+
+.rarity-tag {
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    color: white;
+    margin-bottom: 10px;
+}
+
+/* Rarity colors */
+.rarity-tag.common, .rarity-count.common { background: #6c757d; color: white; }
+.rarity-tag.rare, .rarity-count.rare { background: #0d6efd; color: white; }
+.rarity-tag.epic, .rarity-count.epic { background: #6610f2; color: white; }
+.rarity-tag.legendary, .rarity-count.legendary { 
+    background: var(--gold); 
+    color: #000;
+    box-shadow: 0 0 15px var(--gold);
+}
+
+.rarity-count {
+    padding: 8px 15px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+.stat-card {
+    text-align: left;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}

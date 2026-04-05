@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frecuencia Relativa - Proba Casino</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/juego7.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">PROBA<span>CASINO</span></div>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="catalogo.html">Juegos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="game-header">
+            <h1>Frecuencia Relativa</h1>
+            <p class="myth-box">"Si elijo el 7, tarde o temprano saldrá lo mismo que los otros números." <br><strong>¿Qué tan rápido se estabiliza el azar?</strong></p>
+        </section>
+
+        <div class="game-layout">
+            <!-- Panel Izquierdo -->
+            <div class="game-main">
+                <div class="number-selector">
+                    <h3>Predice el número (1-10):</h3>
+                    <div id="number-grid" class="number-grid">
+                        <!-- Botones 1-10 generados por JS -->
+                    </div>
+                </div>
+
+                <div class="action-buttons" style="margin-top: 2rem;">
+                    <button id="spin-1" class="btn-primary" disabled>Generar 1 Número</button>
+                    <button id="spin-100" class="btn-secondary" disabled>Generar 100 Números</button>
+                    <button id="reset-sim" class="btn-danger">Reiniciar</button>
+                </div>
+
+                <div id="msg-box" class="info-bubble">
+                    Elige un número y observa cómo la frecuencia relativa se estabiliza al 10% a medida que aumentas las pruebas.
+                </div>
+            </div>
+
+            <!-- Panel Derecho -->
+            <div class="game-stats">
+                <div class="stat-card">
+                    <h3>Tu Número Elegido: <span id="selected-val" style="color: var(--gold);">?</span></h3>
+                    <div class="stat-row">
+                        <span>Apariciones:</span> <strong id="stat-hits">0</strong>
+                    </div>
+                    <div class="stat-row">
+                        <span>Frecuencia:</span> <strong id="stat-freq" class="gold">0%</strong>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Gráfico de Barras (1-10)</h3>
+                    <div id="bars-container" class="bars-container">
+                        <!-- Barras de frecuencia generadas por JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="edu-footer">
+            <div class="edu-content">
+                <h3>Ley de los Grandes Números</h3>
+                <p>En el corto plazo, el azar parece caótico y un número puede salir mucho más que otro. Sin embargo, a medida que el número de intentos crece hacia el infinito, la frecuencia observada de cada evento se aproxima cada vez más a su probabilidad teórica (10% en este caso).</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="assets/js/juego7.js"></script>
+</body>
+</html>

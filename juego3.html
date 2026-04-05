@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Carta Caliente - Proba Casino</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/juego3.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">PROBA<span>CASINO</span></div>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="catalogo.html">Juegos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="game-header">
+            <h1>La Carta que "Ya le Toca"</h1>
+            <p class="myth-box">"Esa carta no ha salido en 15 turnos... ¡Seguro sale ahora!" <br><strong>¿Tienen memoria las cartas?</strong></p>
+        </section>
+
+        <div class="game-layout">
+            <!-- Panel Izquierdo -->
+            <div class="game-main">
+                <div class="deck-area">
+                    <div id="card-deck" class="deck">
+                        <div class="card-back">🎴</div>
+                    </div>
+                    <div id="drawn-card-container" class="drawn-card-container">
+                        <div id="result-card" class="card-front hidden">?</div>
+                    </div>
+                </div>
+
+                <div class="user-selection">
+                    <h3>Tu Selección: <span id="selected-card-display" style="color: var(--gold);">Ninguna</span></h3>
+                    <div id="selection-grid" class="selection-grid">
+                        <!-- Botones 1-20 generados por JS -->
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="draw-1" class="btn-primary" disabled>Robar 1 Carta</button>
+                    <button id="draw-20" class="btn-secondary" disabled>Robar 20 Cartas</button>
+                    <button id="reset-game" class="btn-danger">Reiniciar</button>
+                </div>
+            </div>
+
+            <!-- Panel Derecho -->
+            <div class="game-stats">
+                <div class="stat-card" style="border: 2px solid var(--gold);">
+                    <h3>Tus Fichas</h3>
+                    <div id="balance" class="stat-value">1000</div>
+                    <p>Cada apuesta cuesta 10</p>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Aciertos</h3>
+                    <div id="hits" class="stat-value">0</div>
+                    <p>Total de predicciones correctas</p>
+                </div>
+
+                <div id="msg-box" class="info-bubble">
+                    Selecciona una carta de la cuadrícula para apostar. ¡El azar no tiene memoria!
+                </div>
+
+                <div class="frequency-card stat-card" style="text-align: left;">
+                    <h3 style="text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;">Frecuencia de Cartas</h3>
+                    <div id="frequency-list" class="frequency-grid">
+                        <!-- Frecuencias generadas por JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="edu-footer">
+            <div class="edu-content">
+                <h3>Independencia de Eventos</h3>
+                <p>En una baraja aleatoria con reposición (como en este juego), cada vez que robas una carta, la probabilidad de sacar cualquier número es exactamente la misma (1 de 20). El hecho de que una carta no haya salido "en mucho tiempo" no aumenta sus posibilidades.</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="assets/js/juego3.js"></script>
+</body>
+</html>

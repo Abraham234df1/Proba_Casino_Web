@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loot Box Simulator - Proba Casino</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/juego6.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">PROBA<span>CASINO</span></div>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="catalogo.html">Juegos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="game-header">
+            <h1>Loot Box Simulator</h1>
+            <p class="myth-box">"¡Solo una caja más! El objeto legendario tiene 1%... ¡Me toca ya!" <br><strong>¿Cuánto cuesta realmente la suerte?</strong></p>
+        </section>
+
+        <div class="game-layout">
+            <!-- Panel Izquierdo -->
+            <div class="game-main">
+                <div class="box-container">
+                    <div id="loot-box" class="loot-box">
+                        <div class="box-face">📦</div>
+                    </div>
+                    <div id="reward-display" class="reward-display hidden">
+                        <div id="reward-rarity" class="rarity-tag">COMÚN</div>
+                        <div id="reward-icon" class="reward-icon">⚔️</div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="open-1" class="btn-primary">Abrir 1 Caja ($2)</button>
+                    <button id="open-10" class="btn-secondary">Abrir 10 Cajas ($20)</button>
+                    <button id="reset-sim" class="btn-danger">Reiniciar</button>
+                </div>
+
+                <div id="msg-box" class="info-bubble">
+                    Cada caja cuesta $2. El objeto LEGENDARIO tiene solo un 1% de probabilidad.
+                </div>
+            </div>
+
+            <!-- Panel Derecho -->
+            <div class="game-stats">
+                <div class="stat-card" style="border: 2px solid #ff4d4d;">
+                    <h3>Dinero Gastado</h3>
+                    <div id="stat-money" class="stat-value" style="color: #ff4d4d;">$0</div>
+                    <p>Cajas abiertas: <span id="stat-count">0</span></p>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Colección</h3>
+                    <div class="rarity-count common">Comunes: <span id="count-common">0</span></div>
+                    <div class="rarity-count rare">Raros: <span id="count-rare">0</span></div>
+                    <div class="rarity-count epic">Épicos: <span id="count-epic">0</span></div>
+                    <div class="rarity-count legendary">LEGENDARIOS: <span id="count-legendary">0</span></div>
+                </div>
+
+                <div id="legendary-odds" class="info-bubble" style="background: rgba(0,0,0,0.3); border-color: var(--gold);">
+                    Probabilidad de NO haber sacado un Legendario: <strong>100%</strong>
+                </div>
+            </div>
+        </div>
+
+        <section class="edu-footer">
+            <div class="edu-content">
+                <h3>El Negocio de las Loot Boxes</h3>
+                <p>Las cajas de botín utilizan sistemas de refuerzo variable que pueden crear adicción. Matemáticamente, gastar el doble no garantiza ganar; podrías abrir 100 cajas (costando $200) y seguir teniendo un 36.6% de probabilidad de no haber obtenido el objeto del 1%.</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="assets/js/juego6.js"></script>
+</body>
+</html>

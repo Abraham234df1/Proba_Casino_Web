@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contagio en el Salón - Proba Casino</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/juego4.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">PROBA<span>CASINO</span></div>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="catalogo.html">Juegos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="game-header">
+            <h1>Contagio en el Salón</h1>
+            <p class="myth-box">Mito: "Un contagio ocurre al azar y no depende del contacto." <br><strong>¡Demuestra la Probabilidad Condicional!</strong></p>
+        </section>
+
+        <div class="game-layout">
+            <div class="game-main">
+                <div class="simulation-header">
+                    <div class="stat-mini">Ronda: <span id="round-count">1</span></div>
+                    <div class="stat-mini">Créditos: <span id="balance" class="profit">100</span></div>
+                </div>
+
+                <div id="room-grid" class="simulation-grid">
+                    <!-- Los personajes se generarán aquí -->
+                </div>
+
+                <div class="simulation-controls">
+                    <div class="control-group">
+                        <div class="control-label">
+                            <label>Probabilidad de Contagio</label>
+                            <span id="prob-val">30%</span>
+                        </div>
+                        <input type="range" id="prob-range" min="10" max="90" value="30">
+                    </div>
+
+                    <div class="control-group">
+                        <div class="control-label">
+                            <label>Máx. Contagios por Ronda</label>
+                            <span id="max-inf-val">3</span>
+                        </div>
+                        <input type="range" id="max-inf-range" min="1" max="10" value="3">
+                    </div>
+
+                    <div class="action-buttons">
+                        <button id="next-round" class="btn-primary">Simular Ronda</button>
+                        <button id="reset-sim" class="btn-secondary">Reiniciar Todo</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-stats">
+                <div class="stat-card">
+                    <h3>Estado de Población</h3>
+                    <div class="progress-container">
+                        <div class="progress-info"><span>Sanos:</span> <strong id="healthy-count">29</strong></div>
+                        <div class="progress-bg"><div id="healthy-bar" class="progress-fill success" style="width: 96%"></div></div>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-info"><span>Infectados:</span> <strong id="infected-count">1</strong></div>
+                        <div class="progress-bg"><div id="infected-bar" class="progress-fill danger" style="width: 4%"></div></div>
+                    </div>
+                </div>
+
+                <div id="msg-box" class="terminal-box">
+                    <div class="terminal-header">Historial de Simulación</div>
+                    <div id="terminal-content" class="terminal-text">
+                        Esperando predicción del usuario...
+                    </div>
+                </div>
+
+                <div class="stat-card legend-card">
+                    <h3>Leyenda</h3>
+                    <div class="legend-item"><span>👤</span> Sano</div>
+                    <div class="legend-item"><span>😨</span> En Riesgo</div>
+                    <div class="legend-item"><span>🤢</span> Infectado</div>
+                    <div class="legend-item"><span class="target-icon">🎯</span> Tu Predicción (+10/-10)</div>
+                </div>
+            </div>
+        </div>
+
+        <section class="edu-footer">
+            <div class="edu-content">
+                <h3>Eventos Dependientes y Probabilidad Condicional</h3>
+                <p>En este juego, la probabilidad de que una persona se contagie es <strong>dependiente</strong> de su cercanía a un infectado. Si no hay contacto, la probabilidad es cero. Esto ilustra cómo un evento (contagiarse) está condicionado a otro evento previo (estar cerca del foco).</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="assets/js/juego4.js"></script>
+</body>
+</html>

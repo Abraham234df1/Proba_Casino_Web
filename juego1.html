@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Falacia del Jugador - Proba Casino</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/juego1.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">PROBA<span>CASINO</span></div>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="catalogo.html">Juegos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="game-header">
+            <h1>La Falacia del Jugador</h1>
+            <p class="myth-box">"Si sale Cara 5 veces, la próxima ¡DEBE ser Cruz!" <br><strong>¿Es esto cierto?</strong></p>
+        </section>
+
+        <div class="game-layout">
+            <!-- Panel Izquierdo -->
+            <div class="game-main">
+                <div class="bet-controls">
+                    <h3>Elige tu predicción:</h3>
+                    <div class="options-row">
+                        <button id="btn-heads" class="btn-option active">CARA</button>
+                        <button id="btn-tails" class="btn-option">CRUZ</button>
+                    </div>
+                </div>
+
+                <div class="coin-container">
+                    <div id="coin" class="coin">
+                        <div class="side heads"><span>C</span></div>
+                        <div class="side tails"><span>X</span></div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="toss-1" class="btn-primary">Lanzar 1 vez</button>
+                    <button id="toss-20" class="btn-secondary">Lanzar 20 veces</button>
+                    <button id="reset" class="btn-danger">Reiniciar</button>
+                </div>
+
+                <div id="educational-msg" class="info-bubble">
+                    Selecciona Cara o Cruz y lanza la moneda. ¡Cada lanzamiento es un evento independiente!
+                </div>
+            </div>
+
+            <!-- Panel Derecho -->
+            <div class="game-stats">
+                <div class="stat-card">
+                    <h3>Tu Puntería</h3>
+                    <div id="stat-wins" class="stat-value">0</div>
+                    <p>Aciertos totales</p>
+                </div>
+                
+                <div class="stat-card">
+                    <h3>Distribución Real</h3>
+                    <div class="bar-stat">
+                        <div class="bar-label">Cara: <span id="stat-heads">0</span></div>
+                        <div class="prob-bar"><div id="bar-heads" class="bar-fill" style="width: 50%"></div></div>
+                    </div>
+                    <div class="bar-stat" style="margin-top: 15px;">
+                        <div class="bar-label">Cruz: <span id="stat-tails">0</span></div>
+                        <div class="prob-bar"><div id="bar-tails" class="bar-fill" style="width: 50%"></div></div>
+                    </div>
+                </div>
+
+                <div class="history-card">
+                    <h3>Últimos 15 Lanzamientos</h3>
+                    <div id="history-list" class="history-list"></div>
+                </div>
+            </div>
+        </div>
+
+        <section class="edu-footer">
+            <div class="edu-content">
+                <h3>El azar no tiene memoria</h3>
+                <p>La falacia del jugador es creer que los resultados pasados afectan la probabilidad de los resultados futuros en eventos independientes. Si lanzas una moneda 10 veces y sale cara, la probabilidad de que salga cara en el tiro 11 sigue siendo exactamente 50%.</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="assets/js/juego1.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+.number-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    margin-top: 1.5rem;
+}
+
+.num-btn {
+    aspect-ratio: 1;
+    background: transparent;
+    border: 2px solid var(--primary);
+    color: white;
+    font-weight: 800;
+    font-size: 1.5rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.num-btn:hover:not(.selected) {
+    border-color: var(--gold);
+    transform: translateY(-3px);
+}
+
+.num-btn.selected {
+    background: var(--gold);
+    color: #000;
+    border-color: var(--gold);
+    box-shadow: 0 5px 15px rgba(255,183,3,0.4);
+}
+
+.bars-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 1.5rem;
+}
+
+.bar-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.bar-label {
+    width: 25px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.bar-bg {
+    flex-grow: 1;
+    height: 12px;
+    background: #0d1b2a;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    background: var(--primary);
+    transition: width 0.3s ease;
+}
+
+.bar-fill.active-num {
+    background: var(--gold);
+}
+
+.bar-percent {
+    width: 40px;
+    font-size: 0.75rem;
+    text-align: right;
+    color: var(--accent);
+}
+
+@media (max-width: 480px) {
+    .number-grid { grid-template-columns: repeat(4, 1fr); }
+}

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Ruleta del Casino - Proba Casino</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/juego2.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">PROBA<span>CASINO</span></div>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="catalogo.html">Juegos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="game-header">
+            <h1>La Trampa de la Ruleta</h1>
+            <p class="myth-box">"Si juego suficiente tiempo, tarde o temprano recuperaré lo perdido y ganaré." <br><strong>¿Es esto cierto?</strong></p>
+        </section>
+
+        <div class="game-layout">
+            <!-- Panel Izquierdo: Ruleta -->
+            <div class="game-main">
+                <div class="roulette-wrapper">
+                    <div class="pointer">▼</div>
+                    <div id="wheel" class="wheel">
+                        <div id="wheel-numbers" class="wheel-numbers"></div>
+                        <div class="inner-wheel">
+                            <div id="ball" class="ball"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="betting-area">
+                    <div class="chips-display">
+                        <span>💰 Tus Fichas: <strong id="balance">100</strong></span>
+                    </div>
+                    
+                    <div class="bet-selector">
+                        <label>Cantidad a apostar:</label>
+                        <select id="bet-amount">
+                            <option value="10">10 fichas</option>
+                            <option value="20">20 fichas</option>
+                            <option value="50">50 fichas</option>
+                            <option value="100">100 fichas</option>
+                        </select>
+                    </div>
+
+                    <div class="bet-grid">
+                        <div class="bet-row">
+                            <button id="bet-red" class="btn-bet red">Rojo</button>
+                            <button id="bet-black" class="btn-bet black">Negro</button>
+                            <button id="bet-green" class="btn-bet green">Verde (0)</button>
+                        </div>
+                        <div class="bet-row">
+                            <button id="bet-even" class="btn-bet secondary-bet">Par</button>
+                            <button id="bet-odd" class="btn-bet secondary-bet">Impar</button>
+                        </div>
+                        <div class="bet-row">
+                            <button id="bet-low" class="btn-bet secondary-bet">1-18</button>
+                            <button id="bet-high" class="btn-bet secondary-bet">19-36</button>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button id="spin-btn" class="btn-primary" disabled>¡Girar Ruleta!</button>
+                        <button id="retire-btn" class="btn-danger">Retirarse</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel Derecho: Estadísticas y Educación -->
+            <div class="game-stats">
+                <div class="stat-card session-info">
+                    <h3>Sesión</h3>
+                    <div class="stat-row">
+                        <span>Inicial:</span> <strong id="initial-val">100</strong>
+                    </div>
+                    <div class="stat-row">
+                        <span>Actual:</span> <strong id="current-total">100</strong>
+                    </div>
+                    <div class="stat-row">
+                        <span>Balance:</span> <strong id="profit-loss">0</strong>
+                    </div>
+                </div>
+
+                <div class="stat-card win-rates">
+                    <h3>Frecuencia (Últimos 50)</h3>
+                    <div class="rate-bar-container">
+                        <div class="rate-label">Rojo <span id="rate-red">0%</span></div>
+                        <div class="rate-bar"><div id="bar-red" class="bar red" style="width: 0%"></div></div>
+                    </div>
+                    <div class="rate-bar-container">
+                        <div class="rate-label">Negro <span id="rate-black">0%</span></div>
+                        <div class="rate-bar"><div id="bar-black" class="bar black" style="width: 0%"></div></div>
+                    </div>
+                    <div class="rate-bar-container">
+                        <div class="rate-label">Verde <span id="rate-green">0%</span></div>
+                        <div class="rate-bar"><div id="bar-green" class="bar green" style="width: 0%"></div></div>
+                    </div>
+                </div>
+
+                <div id="msg-box" class="info-bubble">
+                    Elige una opción y tu apuesta. ¿Sabías que el "0" es el margen de beneficio del casino?
+                </div>
+
+                <div class="history-card">
+                    <h3>Historial</h3>
+                    <div id="results-history" class="results-grid"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de Educación -->
+        <section class="edu-footer">
+            <div class="edu-content">
+                <h3>¿Por qué la casa siempre gana?</h3>
+                <p>En una ruleta europea hay 37 números (1-36 y el 0). Aunque apuestes a Rojo/Negro, tu probabilidad no es 50%, sino 48.6%. Ese pequeño 2.7% de diferencia (el cero verde) es lo que asegura que, a largo plazo, el casino siempre se quede con tu dinero.</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="assets/js/juego2.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tómbola de la Esperanza - Proba Casino</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/juego5.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">PROBA<span>CASINO</span></div>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="catalogo.html">Juegos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="game-header">
+            <h1>Tómbola de la Esperanza</h1>
+            <p class="myth-box">"Si tengo 5% de probabilidad, ¡En 20 intentos seguro gano!" <br><strong>¿Es acumulativa la suerte?</strong></p>
+        </section>
+
+        <div class="game-layout">
+            <!-- Panel Izquierdo -->
+            <div class="game-main">
+                <div class="tombola-container">
+                    <div id="tombola" class="tombola">
+                        <!-- Bolas generadas por JS -->
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="spin-1" class="btn-primary">Intentar 1 vez (5%)</button>
+                    <button id="spin-20" class="btn-secondary">Intentar 20 veces</button>
+                    <button id="reset-tombola" class="btn-danger">Reiniciar</button>
+                </div>
+
+                <div id="msg-box" class="info-bubble">
+                    Haz clic en intentar para buscar la bola dorada. Tienes un 5% de probabilidad en cada intento.
+                </div>
+            </div>
+
+            <!-- Panel Derecho -->
+            <div class="game-stats">
+                <div class="stat-card">
+                    <h3>Intentos Totales</h3>
+                    <div id="stat-attempts" class="stat-value">0</div>
+                </div>
+                
+                <div class="stat-card">
+                    <h3>Premios Ganados</h3>
+                    <div id="stat-wins" class="stat-value">0</div>
+                    <p>Bola dorada encontrada</p>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Probabilidad Real</h3>
+                    <p>Chance de NO haber ganado aún:</p>
+                    <div class="stat-value" id="stat-fail-prob" style="color: var(--danger);">100%</div>
+                    <p style="font-size: 0.8rem;">(0.95 ^ intentos)</p>
+                </div>
+            </div>
+        </div>
+
+        <section class="edu-footer">
+            <div class="edu-content">
+                <h3>La Falacia del Intento</h3>
+                <p>Mucha gente cree que si algo tiene 5% (1 de 20), después de 20 intentos es 100% seguro que ocurra. En realidad, la probabilidad de NO ganar después de 20 intentos sigue siendo del 35.8%. Cada intento es independiente y no "acumula" suerte.</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="assets/js/juego5.js"></script>
+</body>
+</html>
