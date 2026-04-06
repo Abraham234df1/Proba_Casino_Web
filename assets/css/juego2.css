@@ -1,7 +1,23 @@
+/* ============================================
+    VARIABLES Y BASE
+   ============================================ */
 :root {
     --roulette-size: 350px;
-    --roulette-border: #444;
-    --roulette-gold: #c5a059;
+    --roulette-border: #334155;
+    --gold: #ffb703;
+    --card-bg: #0f172a;
+    --primary: #1e293b;
+    --accent: #fbbf24;
+    --red-btn: #e63946;
+    --black-btn: #1a1a1a;
+    --green-btn: #2ecc71;
+    --text-main: #ffffff;
+}
+
+body {
+    background-color: #050a14;
+    color: var(--text-main);
+    font-family: 'Segoe UI', Roboto, sans-serif;
 }
 
 .container {
@@ -10,21 +26,34 @@
     padding: 0 20px;
 }
 
+/* ============================================
+    HEADER & MYTH BOX
+   ============================================ */
 .game-header {
     text-align: center;
     margin-bottom: 3rem;
 }
 
+.game-header h1 {
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
 .myth-box {
-    background-color: var(--card-bg);
+    background-color: var(--primary);
     border-left: 5px solid var(--gold);
     padding: 1.2rem 2.5rem;
     display: inline-block;
     font-size: 1.1rem;
     margin-top: 1rem;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    border-radius: 4px;
 }
 
+/* ============================================
+    LAYOUT PRINCIPAL
+   ============================================ */
 .game-layout {
     display: grid;
     grid-template-columns: 1.2fr 0.8fr;
@@ -32,6 +61,9 @@
     margin-top: 2rem;
 }
 
+/* ============================================
+    RULETA (WHEEL)
+   ============================================ */
 .roulette-wrapper {
     position: relative;
     width: var(--roulette-size);
@@ -40,19 +72,22 @@
     background: radial-gradient(circle, #222 0%, #000 100%);
     border-radius: 50%;
     padding: 15px;
-    box-shadow: 0 0 50px rgba(0,0,0,0.8), inset 0 0 20px rgba(255,183,3,0.2);
-    border: 8px solid var(--roulette-border);
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    border: 10px solid var(--roulette-border);
 }
 
 .pointer {
     position: absolute;
-    top: -20px;
+    top: -15px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 100;
-    font-size: 2.5rem;
-    color: var(--gold);
-    text-shadow: 0 0 10px rgba(0,0,0,0.5);
+    width: 0; 
+    height: 0; 
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 25px solid var(--gold);
+    filter: drop-shadow(0 0 5px rgba(0,0,0,0.5));
 }
 
 .wheel {
@@ -63,94 +98,76 @@
     transition: transform 5s cubic-bezier(0.1, 0, 0.1, 1);
     background: #000;
     overflow: hidden;
-    border: 4px solid #333;
 }
 
-/* Base wheel background with conic gradient for sections */
+/* El fondo de colores (37 divisiones de ~9.73deg) */
 .wheel::before {
     content: "";
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
     background: conic-gradient(
-        #0a0 0deg 9.73deg,  /* 0 Green */
-        #d00 9.73deg 19.46deg, #222 19.46deg 29.19deg, #d00 29.19deg 38.92deg, #222 38.92deg 48.65deg,
-        #d00 48.65deg 58.38deg, #222 58.38deg 68.11deg, #d00 68.11deg 77.84deg, #222 77.84deg 87.57deg,
-        #d00 87.57deg 97.3deg, #222 97.3deg 107.03deg, #222 107.03deg 116.76deg, #d00 116.76deg 126.49deg,
-        #222 126.49deg 136.22deg, #d00 136.22deg 145.95deg, #222 145.95deg 155.68deg, #d00 155.68deg 165.41deg,
-        #222 165.41deg 175.14deg, #d00 175.14deg 184.87deg, #d00 184.87deg 194.6deg, #222 194.6deg 204.33deg,
-        #d00 204.33deg 214.06deg, #222 214.06deg 223.79deg, #d00 223.79deg 233.52deg, #222 233.52deg 243.25deg,
-        #d00 243.25deg 252.98deg, #222 252.98deg 262.71deg, #d00 262.71deg 272.44deg, #222 272.44deg 282.17deg,
-        #222 282.17deg 291.9deg, #d00 291.9deg 301.63deg, #222 301.63deg 311.36deg, #d00 311.36deg 321.09deg,
-        #222 321.09deg 330.82deg, #d00 330.82deg 340.55deg, #222 340.55deg 350.28deg, #d00 350.28deg 360deg
+        var(--green-btn) 0deg 9.73deg,
+        #d00 9.73deg 19.46deg, #111 19.46deg 29.19deg, #d00 29.19deg 38.92deg, #111 38.92deg 48.65deg,
+        #d00 48.65deg 58.38deg, #111 58.38deg 68.11deg, #d00 68.11deg 77.84deg, #111 77.84deg 87.57deg,
+        #d00 87.57deg 97.3deg, #111 97.3deg 107.03deg, #111 107.03deg 116.76deg, #d00 116.76deg 126.49deg,
+        #111 126.49deg 136.22deg, #d00 136.22deg 145.95deg, #111 145.95deg 155.68deg, #d00 155.68deg 165.41deg,
+        #111 165.41deg 175.14deg, #d00 175.14deg 184.87deg, #d00 184.87deg 194.6deg, #111 194.6deg 204.33deg,
+        #d00 204.33deg 214.06deg, #111 214.06deg 223.79deg, #d00 223.79deg 233.52deg, #111 223.79deg 243.25deg,
+        #d00 243.25deg 252.98deg, #111 252.98deg 262.71deg, #d00 262.71deg 272.44deg, #111 272.44deg 282.17deg,
+        #111 282.17deg 291.9deg, #d00 291.9deg 301.63deg, #111 301.63deg 311.36deg, #d00 311.36deg 321.09deg,
+        #111 321.09deg 330.82deg, #d00 330.82deg 340.55deg, #111 340.55deg 350.28deg, #d00 350.28deg 360deg
     );
-}
-
-.wheel-numbers {
-    position: absolute;
-    width: 100%;
-    height: 100%;
 }
 
 .wheel-number {
     position: absolute;
     top: 10px;
     left: 50%;
-    transform-origin: 50% 165px; /* Half of wheel size - top margin */
+    /* Calculado para centrar en el radio */
+    transform-origin: 50% calc(var(--roulette-size) / 2 - 10px); 
     margin-left: -10px;
     color: white;
     font-weight: bold;
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     width: 20px;
     text-align: center;
+    z-index: 5;
 }
 
 .inner-wheel {
     position: absolute;
-    width: 75%;
-    height: 75%;
-    background: radial-gradient(circle, #444 0%, #111 100%);
-    top: 12.5%;
-    left: 12.5%;
+    width: 70%;
+    height: 70%;
+    background: radial-gradient(circle, #334155 0%, #0f172a 100%);
+    top: 15%;
+    left: 15%;
     border-radius: 50%;
-    border: 6px solid #555;
-    box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 0 10px rgba(0,0,0,0.5);
+    border: 6px solid #475569;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 10;
 }
 
 .inner-wheel::after {
     content: "";
-    width: 40px;
-    height: 40px;
-    background: radial-gradient(circle, #eee 0%, #999 100%);
+    width: 45px;
+    height: 45px;
+    background: radial-gradient(circle, #ffffff 0%, #94a3b8 100%);
     border-radius: 50%;
-    box-shadow: 0 0 10px #000;
-    border: 2px solid #fff;
+    box-shadow: 0 0 15px #000;
 }
 
-.ball {
-    position: absolute;
-    width: 14px;
-    height: 14px;
-    background: radial-gradient(circle, #fff 0%, #ccc 100%);
-    border-radius: 50%;
-    top: -7px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: none; /* Only show when spinning or result known */
-    z-index: 50;
-    box-shadow: 0 0 5px rgba(0,0,0,0.5);
-}
-
-/* Area de Apuestas */
+/* ============================================
+    APUESTAS (BETTING)
+   ============================================ */
 .betting-area {
     background: var(--card-bg);
-    padding: 1.5rem;
+    padding: 2rem;
     border-radius: 20px;
+    border: 1px solid #334155;
     text-align: center;
-    border: 1px solid var(--primary);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
 .chips-display {
@@ -163,8 +180,7 @@
 .bet-grid {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    margin-bottom: 2rem;
+    gap: 15px;
 }
 
 .bet-row {
@@ -174,261 +190,94 @@
 
 .btn-bet {
     flex: 1;
-    padding: 12px 5px;
+    padding: 15px 5px;
     border: 2px solid transparent;
     border-radius: 10px;
-    font-weight: bold;
+    font-weight: 800;
     cursor: pointer;
     text-transform: uppercase;
-    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.2s ease;
     color: white;
 }
 
-.btn-bet.red { background: linear-gradient(to bottom, #f00, #900); }
-.btn-bet.black { background: linear-gradient(to bottom, #444, #111); }
-.btn-bet.green { background: linear-gradient(to bottom, #0c0, #040); }
-.btn-bet.secondary-bet { background: #3a506b; color: #fff; }
+.btn-bet.red { background: linear-gradient(to bottom, #ef4444, #991b1b); }
+.btn-bet.black { background: linear-gradient(to bottom, #444, #000); }
+.btn-bet.green { background: linear-gradient(to bottom, #22c55e, #166534); }
+.btn-bet.secondary-bet { background: #334155; }
 
-.btn-bet:hover:not(.selected) {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+.btn-bet:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.2);
 }
 
-.btn-bet.selected {
-    border-color: var(--gold);
-    box-shadow: 0 0 20px rgba(255, 183, 3, 0.5);
-    transform: scale(1.05);
-}
-
-/* Stats Styling */
+/* ============================================
+    ESTADÍSTICAS (STATS)
+   ============================================ */
 .stat-card {
     background: var(--card-bg);
     border-radius: 15px;
     padding: 1.2rem;
     margin-bottom: 1.5rem;
-    border: 1px solid var(--primary);
+    border: 1px solid #334155;
 }
 
 .stat-card h3 {
     margin-bottom: 1rem;
     font-size: 1.1rem;
     color: var(--gold);
-    border-bottom: 1px solid var(--primary);
-    padding-bottom: 5px;
-}
-
-.stat-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 8px;
+    text-align: center;
+    border-bottom: 1px solid #334155;
+    padding-bottom: 8px;
 }
 
 .rate-bar-container {
-    margin-bottom: 12px;
+    margin-bottom: 15px;
 }
 
 .rate-label {
     display: flex;
     justify-content: space-between;
-    font-size: 0.85rem;
-    margin-bottom: 4px;
+    font-size: 0.9rem;
+    margin-bottom: 6px;
 }
 
 .rate-bar {
-    height: 8px;
-    background: #0d1b2a;
-    border-radius: 4px;
+    height: 10px;
+    background: #050a14;
+    border-radius: 5px;
     overflow: hidden;
 }
 
 .bar {
     height: 100%;
-    transition: width 0.5s ease;
+    transition: width 0.8s ease;
 }
 
-.bar.red { background: #d00; }
-.bar.black { background: #222; }
-.bar.green { background: #0a0; }
-
-.history-card {
-    max-height: 200px;
-    overflow-y: auto;
-}
-
-.results-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(35px, 1fr));
-    gap: 8px;
-}
-
-.res-item {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.85rem;
-    font-weight: bold;
-    color: white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    animation: pop-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-@keyframes pop-in {
-    from { transform: scale(0); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-}
-
-.profit { color: #4ade80; text-shadow: 0 0 10px rgba(74, 222, 128, 0.3); }
-.loss { color: #f87171; text-shadow: 0 0 10px rgba(248, 113, 113, 0.3); }
+.bar.red { background: #ef4444; }
+.bar.black { background: #64748b; }
+.bar.green { background: #22c55e; }
 
 .info-bubble {
     background-color: var(--primary);
     padding: 1.2rem;
-    border-radius: 15px;
+    border-radius: 12px;
     margin-top: 1rem;
     text-align: center;
     font-style: italic;
-    color: var(--accent);
+    color: #94a3b8;
     border: 1px dashed var(--gold);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-.action-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1.5rem;
-}
-
-.btn-danger {
-    background: linear-gradient(135deg, #e63946 0%, #a82a33 100%);
-    color: #fff;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 700;
-    transition: 0.2s;
-    box-shadow: 0 4px 10px rgba(230,57,70,0.3);
-}
-
-.btn-danger:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(230,57,70,0.5);
-}
-
+/* ============================================
+    RESPONSIVE
+   ============================================ */
 @media (max-width: 900px) {
-    .game-layout {
-        grid-template-columns: 1fr;
-    }
+    .game-layout { grid-template-columns: 1fr; }
+    :root { --roulette-size: 300px; }
 }
 
-/* ============================================
-   RESPONSIVE - TABLETS
-   ============================================ */
-@media (max-width: 768px) {
-    :root {
-        --roulette-size: 280px;
-    }
-    
-    .roulette-wrapper {
-        margin: 0 auto 2rem;
-    }
-    
-    .bet-grid {
-        gap: 0.8rem;
-    }
-    
-    .btn-bet {
-        padding: 10px 16px;
-        font-size: 0.9rem;
-    }
-    
-    .betting-area {
-        margin-top: 1.5rem;
-    }
-    
-    .results-grid {
-        gap: 6px;
-    }
-    
-    .res-item {
-        width: 32px;
-        height: 32px;
-        font-size: 0.85rem;
-    }
-}
-
-/* ============================================
-   RESPONSIVE - MOBILE
-   ============================================ */
 @media (max-width: 480px) {
-    :root {
-        --roulette-size: 240px;
-    }
-    
-    .roulette-wrapper {
-        padding: 10px;
-        border-width: 6px;
-    }
-    
-    .pointer {
-        font-size: 2rem;
-        top: -15px;
-    }
-    
-    .wheel-number {
-        transform-origin: 50% 110px;
-        font-size: 0.6rem;
-        top: 8px;
-    }
-    
-    .bet-selector select {
-        width: 100%;
-        padding: 10px;
-        font-size: 0.95rem;
-    }
-    
-    .bet-grid {
-        gap: 0.5rem;
-    }
-    
-    .bet-row {
-        flex-direction: column;
-        width: 100%;
-    }
-    
-    .btn-bet {
-        width: 100%;
-        padding: 12px;
-        min-height: 48px;
-        font-size: 1rem;
-    }
-    
-    .chips-display {
-        font-size: 1.1rem;
-        margin-bottom: 1rem;
-    }
-    
-    .results-grid {
-        gap: 5px;
-        justify-content: center;
-    }
-    
-    .res-item {
-        width: 28px;
-        height: 28px;
-        font-size: 0.75rem;
-    }
-    
-    .rate-bar-container {
-        margin-bottom: 0.8rem;
-    }
-    
-    .rate-label {
-        font-size: 0.9rem;
-        margin-bottom: 5px;
-    }
+    :root { --roulette-size: 250px; }
+    .bet-row { flex-direction: column; }
+    .btn-bet { padding: 12px; }
 }
