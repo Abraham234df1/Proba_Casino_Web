@@ -35,11 +35,25 @@ const reds = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36]
 
 // Initialize Wheel Numbers
 function initWheel() {
+    const segmentDeg = 360 / 37; // ~9.73 grados por segmento
+    const wheelSize = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--roulette-size'));
+    const radius = (wheelSize / 2) * 0.72; // 72% del radio
+    
     rouletteOrder.forEach((num, i) => {
         const numEl = document.createElement('div');
         numEl.className = 'wheel-number';
         numEl.innerText = num;
-        numEl.style.transform = `rotate(${i * (360 / 37)}deg)`;
+        numEl.dataset.index = i;
+        
+        // Ángulo de este segmento (centro del segmento)
+        const angle = (i * segmentDeg) + (segmentDeg / 2);
+        
+        // Posicionar en círculo
+        numEl.style.left = '50%';
+        numEl.style.top = '50%';
+        // Rotar el número Y desplazarlo hacia afuera, luego contra-rotar el texto
+        numEl.style.transform = `translate(-50%, -50%) rotate(${angle}deg) translateY(-${radius}px) rotate(-${angle}deg)`;
+        
         wheelNumbersContainer.appendChild(numEl);
     });
 }
@@ -143,14 +157,19 @@ spinBtn.addEventListener('click', () => {
     const resultColor = getResultColor(resultNumber);
 
     // Rotation Logic
-    // Each segment is 360/37 deg
-    const segmentDeg = 360 / 37;
-    const extraSpins = 5 + Math.random() * 2;
-    // We want the resultIndex to be at the top (0 deg)
-    // The current rotation of the wheel + the added rotation
-    // should end with -(resultIndex * segmentDeg) at the pointer.
-    const targetRotation = (360 * extraSpins) - (resultIndex * segmentDeg);
-    currentRotation += targetRotation - (currentRotation % 360);
+    const segmentDeg = 360 / 37; // ~9.73 grados por segmento
+    const extraSpins = 5 + Math.random() * 2; // 5-7 vueltas extra
+    
+    // El índice 0 está en 0° (3 en punto en el gradiente)
+    // El puntero está arriba (-90° o 270°)
+    // Necesitamos rotar para que el centro del segmento ganador quede en 270°
+    
+    const segmentCenterAngle = (resultIndex * segmentDeg) + (segmentDeg / 2);
+    const targetPosition = 270; // Posición del puntero (arriba)
+    const rotationNeeded = targetPosition - segmentCenterAngle;
+    
+    const totalRotation = (360 * extraSpins) + rotationNeeded;
+    currentRotation += totalRotation;
     
     wheel.style.transform = `rotate(${currentRotation}deg)`;
 
