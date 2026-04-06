@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monte Carlo Simulator - Proba Casino</title>
+    <title>La Ilusión de la Precisión - Proba Casino</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/juego8.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,60 +32,147 @@
 
     <main class="container">
         <section class="game-header">
-            <h1>Simulador Monte Carlo</h1>
-            <p class="myth-box">"El azar es impredecible..." <br><strong>¿Y si lanzamos la moneda 10,000 veces?</strong></p>
+            <h1>La Ilusión de la Precisión</h1>
+            <p class="myth-box">"Si algo casi ocurre, significa que estamos cerca de lograrlo." <br><strong>¿Tiene valor un "casi" en probabilidad?</strong></p>
         </section>
 
         <div class="game-layout">
             <div class="game-main">
-                <div class="sim-controls">
-                    <h3>Poder de Procesamiento</h3>
-                    <p>Simula miles de eventos instantáneamente para ver la convergencia.</p>
-                    <div class="action-buttons" style="margin-top: 20px;">
-                        <button id="sim-100" class="btn-secondary">Lanzar 100</button>
-                        <button id="sim-1000" class="btn-primary">Lanzar 1,000</button>
-                        <button id="sim-10000" class="btn-danger" style="background: #ffb703; color: black;">Lanzar 10,000</button>
+                <div class="slot-machine">
+                    <div class="machine-header">
+                        <div class="neon-sign">🎰 LUCKY 777 🎰</div>
+                    </div>
+                    
+                    <div class="reels-container">
+                        <div class="reel-wrapper">
+                            <div id="reel-1" class="reel">
+                                <div class="symbol">🍒</div>
+                                <div class="symbol">🍋</div>
+                                <div class="symbol">🍊</div>
+                                <div class="symbol">🍇</div>
+                                <div class="symbol">⭐</div>
+                                <div class="symbol">7️⃣</div>
+                                <div class="symbol">💎</div>
+                            </div>
+                        </div>
+                        <div class="reel-wrapper">
+                            <div id="reel-2" class="reel">
+                                <div class="symbol">🍒</div>
+                                <div class="symbol">🍋</div>
+                                <div class="symbol">🍊</div>
+                                <div class="symbol">🍇</div>
+                                <div class="symbol">⭐</div>
+                                <div class="symbol">7️⃣</div>
+                                <div class="symbol">💎</div>
+                            </div>
+                        </div>
+                        <div class="reel-wrapper">
+                            <div id="reel-3" class="reel">
+                                <div class="symbol">🍒</div>
+                                <div class="symbol">🍋</div>
+                                <div class="symbol">🍊</div>
+                                <div class="symbol">🍇</div>
+                                <div class="symbol">⭐</div>
+                                <div class="symbol">7️⃣</div>
+                                <div class="symbol">💎</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-display">
+                        <div id="result-text" class="result-text">Presiona GIRAR para comenzar</div>
+                    </div>
+
+                    <div class="controls">
+                        <button id="spin-btn" class="btn-spin">🎰 GIRAR (10 fichas)</button>
+                    </div>
+
+                    <div class="balance-display">
+                        <div class="balance-item">
+                            <span>💰 Fichas:</span>
+                            <span id="balance" class="balance-value">1000</span>
+                        </div>
+                        <div class="balance-item">
+                            <span>🎯 Giros:</span>
+                            <span id="total-spins">0</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="chart-container">
-                    <div id="chart-area" class="chart-area">
-                        <!-- Visualización de convergencia -->
-                        <div id="convergence-line" class="convergence-line"></div>
-                        <div id="data-points" class="data-points"></div>
+                <div class="paytable">
+                    <h3>💰 Tabla de Pagos</h3>
+                    <div class="paytable-row">
+                        <span>💎💎💎</span>
+                        <span class="payout">500 fichas</span>
                     </div>
-                    <div class="chart-labels">
-                        <span>0</span>
-                        <span>Progreso de Simulaciones</span>
-                        <span id="max-label">10000</span>
+                    <div class="paytable-row">
+                        <span>7️⃣7️⃣7️⃣</span>
+                        <span class="payout">200 fichas</span>
+                    </div>
+                    <div class="paytable-row">
+                        <span>⭐⭐⭐</span>
+                        <span class="payout">100 fichas</span>
+                    </div>
+                    <div class="paytable-row">
+                        <span>🍇🍇🍇</span>
+                        <span class="payout">50 fichas</span>
+                    </div>
+                    <div class="paytable-row">
+                        <span>🍊🍊🍊</span>
+                        <span class="payout">40 fichas</span>
+                    </div>
+                    <div class="paytable-row">
+                        <span>🍋🍋🍋</span>
+                        <span class="payout">30 fichas</span>
+                    </div>
+                    <div class="paytable-row">
+                        <span>🍒🍒🍒</span>
+                        <span class="payout">20 fichas</span>
+                    </div>
+                    <div class="paytable-note">
+                        Los 3 símbolos deben coincidir
                     </div>
                 </div>
             </div>
 
             <div class="game-stats">
                 <div class="stat-card">
-                    <h3>Total Lanzamientos</h3>
-                    <div id="stat-total" class="stat-value">0</div>
+                    <h3>🏆 Victorias</h3>
+                    <div id="stat-wins" class="stat-value">0</div>
+                    <p>Combinaciones ganadoras</p>
+                </div>
+
+                <div class="stat-card near-miss-card">
+                    <h3>⚠️ "Casi Gané"</h3>
+                    <div id="stat-near-wins" class="stat-value">0</div>
+                    <p>2 de 3 símbolos iguales</p>
                 </div>
 
                 <div class="stat-card">
-                    <h3>Frecuencia de Cara</h3>
-                    <div id="stat-heads-perc" class="stat-value">0%</div>
-                    <p>Objetivo Teórico: 50%</p>
+                    <h3>❌ Sin Coincidencias</h3>
+                    <div id="stat-losses" class="stat-value">0</div>
+                    <p>0 símbolos iguales</p>
+                </div>
+
+                <div class="probability-box">
+                    <h4>📊 Realidad Matemática</h4>
+                    <p>Probabilidad de victoria después de "casi ganar":</p>
+                    <div class="prob-value"><span id="prob-after-near">0%</span></div>
+                    <p style="margin-top: 10px;">Probabilidad de victoria en cualquier giro:</p>
+                    <div class="prob-value"><span id="prob-always">14.3%</span></div>
+                    <p class="prob-note">¡Son iguales! "Casi ganar" no significa nada.</p>
                 </div>
 
                 <div id="msg-box" class="info-bubble">
-                    Usa el simulador para ver cómo, a mayor volumen de datos, la probabilidad real se ajusta perfectamente a la teoría.
+                    Los casinos diseñan las tragamonedas para que "casi ganes" frecuentemente. Esto genera la ilusión de que estás cerca del premio, pero matemáticamente cada giro es independiente.
                 </div>
-                
-                <button id="reset-sim" class="btn-secondary" style="width: 100%;">Limpiar Datos</button>
             </div>
         </div>
 
         <section class="edu-footer">
             <div class="edu-content">
-                <h3>La Ley de los Grandes Números</h3>
-                <p>Este simulador utiliza el Método de Monte Carlo. Demuestra que aunque un solo lanzamiento es impredecible, el promedio de una gran cantidad de lanzamientos es muy predecible. Cuantos más datos tenemos, menos impacto tiene la suerte individual y más brilla la matemática pura.</p>
+                <h3>La Trampa del "Casi"</h3>
+                <p>Las tragamonedas están diseñadas para mostrar frecuentemente combinaciones "casi ganadoras" (2 de 3 símbolos). Esto crea la ilusión de que estás cerca de ganar, pero matemáticamente cada giro es completamente independiente. La probabilidad de ganar después de "casi ganar" es exactamente la misma que después de perder totalmente. Los casinos explotan esta ilusión perceptual para mantenerte jugando.</p>
             </div>
         </section>
     </main>

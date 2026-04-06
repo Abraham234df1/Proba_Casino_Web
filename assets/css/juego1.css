@@ -152,7 +152,77 @@
     to { transform: scale(1); opacity: 1; }
 }
 
+/* ============================================
+   RESPONSIVE - TABLETS
+   ============================================ */
+@media (max-width: 768px) {
+    .coin-container {
+        width: 180px;
+        height: 180px;
+        margin: 2rem auto;
+    }
+    
+    .side {
+        font-size: 4.5rem;
+    }
+    
+    .options-row {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .btn-option {
+        width: 100%;
+        padding: 14px 30px;
+    }
+    
+    .history-item {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+}
+
+/* ============================================
+   RESPONSIVE - MOBILE
+   ============================================ */
 @media (max-width: 480px) {
-    .coin-container { width: 150px; height: 150px; }
-    .side { font-size: 3.5rem; }
+    .coin-container { 
+        width: 150px; 
+        height: 150px;
+        margin: 1.5rem auto;
+    }
+    
+    .side { 
+        font-size: 3.5rem;
+        border-width: 8px;
+    }
+    
+    .bet-controls h3 {
+        font-size: 1rem;
+    }
+    
+    .options-row {
+        gap: 0.8rem;
+    }
+    
+    .btn-option {
+        padding: 12px 20px;
+        font-size: 0.95rem;
+    }
+    
+    .history-list {
+        gap: 6px;
+        min-height: 35px;
+    }
+    
+    .history-item {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+    }
+    
+    .bar-label {
+        font-size: 0.85rem;
+    }
 }

@@ -122,7 +122,74 @@
     font-weight: bold;
 }
 
+/* ============================================
+   RESPONSIVE - TABLETS
+   ============================================ */
+@media (max-width: 768px) {
+    .selection-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+        padding: 1rem;
+    }
+    
+    .btn-card {
+        font-size: 1rem;
+    }
+    
+    .deck-area {
+        gap: 2rem;
+    }
+    
+    .frequency-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+    }
+}
+
+/* ============================================
+   RESPONSIVE - MOBILE
+   ============================================ */
 @media (max-width: 480px) {
-    .deck-area { gap: 1rem; }
-    .deck, .card-front { width: 90px; height: 135px; font-size: 3rem; }
+    .deck-area { 
+        gap: 1rem;
+        flex-direction: column;
+    }
+    
+    .deck, .card-front { 
+        width: 90px; 
+        height: 135px; 
+        font-size: 3rem;
+    }
+    
+    .selection-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        padding: 0.8rem;
+    }
+    
+    .btn-card {
+        font-size: 0.95rem;
+        min-height: 50px;
+    }
+    
+    .multiplier-tag {
+        font-size: 0.6rem;
+        padding: 2px 4px;
+        top: -6px;
+        right: -6px;
+    }
+    
+    .user-selection h3 {
+        font-size: 1rem;
+    }
+    
+    .frequency-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+        font-size: 0.75rem;
+    }
+    
+    .freq-item {
+        padding: 4px;
+    }
 }

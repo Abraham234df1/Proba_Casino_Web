@@ -1,0 +1,451 @@
+/* ============================================
+   TEMA CLARO
+   ============================================ */
+:root[data-theme="light"] {
+    --bg-color: #f5f5f5;
+    --card-bg: #ffffff;
+    --accent: #415a77;
+    --primary: #778da9;
+    --gold: #d4af37;
+    --text: #0a1128;
+    --danger: #d32f2f;
+    --success: #388e3c;
+}
+
+:root[data-theme="light"] body {
+    background-color: var(--bg-color);
+    color: var(--text);
+}
+
+:root[data-theme="light"] .game-main,
+:root[data-theme="light"] .stat-card,
+:root[data-theme="light"] .game-card {
+    background: var(--card-bg);
+    border-color: rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+:root[data-theme="light"] .edu-footer {
+    background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+    border-color: rgba(0,0,0,0.1);
+}
+
+:root[data-theme="light"] .myth-box,
+:root[data-theme="light"] .info-bubble {
+    background: rgba(119, 141, 169, 0.1);
+    color: var(--text);
+    border-color: var(--gold);
+}
+
+:root[data-theme="light"] header {
+    background: rgba(255, 255, 255, 0.95);
+    border-bottom-color: var(--gold);
+}
+
+:root[data-theme="light"] .coin .heads {
+    background: linear-gradient(135deg, #d4af37 0%, #aa8c2d 100%);
+}
+
+:root[data-theme="light"] .coin .tails {
+    background: linear-gradient(135deg, #c0c0c0 0%, #808080 100%);
+}
+
+/* ============================================
+   BOTONES FLOTANTES (Tema, Sonido, Compartir, Instalar)
+   ============================================ */
+.theme-toggle,
+.sound-toggle,
+.share-button,
+.install-button {
+    position: fixed;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--card-bg);
+    border: 2px solid var(--gold);
+    cursor: pointer;
+    z-index: 9998;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.theme-toggle:hover,
+.sound-toggle:hover,
+.share-button:hover,
+.install-button:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 8px 25px rgba(255, 183, 3, 0.5);
+}
+
+.theme-toggle:active,
+.sound-toggle:active,
+.share-button:active,
+.install-button:active {
+    transform: translateY(-2px) scale(1.05);
+}
+
+/* Posiciones */
+.theme-toggle {
+    top: 5rem;
+    right: 2rem;
+}
+
+.sound-toggle {
+    top: 8rem;
+    right: 2rem;
+}
+
+.share-button {
+    top: 11rem;
+    right: 2rem;
+}
+
+.install-button {
+    top: 14rem;
+    right: 2rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Iconos */
+.theme-icon,
+.sound-icon,
+.share-icon,
+.install-icon {
+    transition: all 0.3s;
+}
+
+/* Theme toggle */
+.theme-toggle .sun {
+    display: none;
+}
+
+.theme-toggle .moon {
+    display: block;
+}
+
+:root[data-theme="light"] .theme-toggle .sun {
+    display: block;
+}
+
+:root[data-theme="light"] .theme-toggle .moon {
+    display: none;
+}
+
+/* Sound toggle */
+.sound-toggle .on {
+    display: block;
+}
+
+.sound-toggle .off {
+    display: none;
+}
+
+.sound-toggle.muted .on {
+    display: none;
+}
+
+.sound-toggle.muted .off {
+    display: block;
+}
+
+.sound-toggle.muted {
+    opacity: 0.6;
+}
+
+/* Responsive - Mobile */
+@media (max-width: 768px) {
+    .theme-toggle,
+    .sound-toggle,
+    .share-button,
+    .install-button {
+        width: 48px;
+        height: 48px;
+        font-size: 1.5rem;
+        right: 1rem;
+    }
+    
+    .theme-toggle { top: 4.5rem; }
+    .sound-toggle { top: 7rem; }
+    .share-button { top: 9.5rem; }
+    .install-button { top: 12rem; }
+}
+
+/* ============================================
+   MODAL DE COMPARTIR
+   ============================================ */
+.share-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10001;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.share-modal.show {
+    opacity: 1;
+}
+
+.share-modal-content {
+    background: var(--card-bg);
+    border-radius: 20px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow: auto;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.share-modal.show .share-modal-content {
+    transform: scale(1);
+}
+
+.share-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.share-modal-header h3 {
+    margin: 0;
+    color: var(--gold);
+}
+
+.share-modal-close {
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 2rem;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+
+.share-modal-close:hover {
+    background: rgba(255,255,255,0.1);
+    color: var(--gold);
+}
+
+.share-modal-body {
+    padding: 2rem;
+}
+
+.share-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.share-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.5rem 1rem;
+    border: 2px solid var(--primary);
+    border-radius: 15px;
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 600;
+}
+
+.share-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.share-btn.twitter {
+    border-color: #1DA1F2;
+}
+
+.share-btn.twitter:hover {
+    background: #1DA1F2;
+    color: white;
+}
+
+.share-btn.facebook {
+    border-color: #4267B2;
+}
+
+.share-btn.facebook:hover {
+    background: #4267B2;
+    color: white;
+}
+
+.share-btn.whatsapp {
+    border-color: #25D366;
+}
+
+.share-btn.whatsapp:hover {
+    background: #25D366;
+    color: white;
+}
+
+.share-btn.copy {
+    border-color: var(--gold);
+}
+
+.share-btn.copy:hover {
+    background: var(--gold);
+    color: #000;
+}
+
+.share-btn span:first-child {
+    font-size: 2rem;
+}
+
+.share-preview {
+    background: rgba(0,0,0,0.2);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-left: 4px solid var(--gold);
+}
+
+.share-preview p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* ============================================
+   MODO PWA
+   ============================================ */
+.pwa-mode header {
+    padding-top: env(safe-area-inset-top);
+}
+
+.pwa-mode footer {
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Ocultar botones flotantes en landscape móvil */
+@media (max-height: 500px) and (orientation: landscape) {
+    .theme-toggle,
+    .sound-toggle,
+    .share-button,
+    .install-button {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+}
+
+/* ============================================
+   ANIMACIONES ADICIONALES
+   ============================================ */
+@keyframes slideInFromRight {
+    from {
+        transform: translateX(100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.theme-toggle,
+.sound-toggle,
+.share-button,
+.install-button {
+    animation: slideInFromRight 0.5s ease-out backwards;
+}
+
+.sound-toggle { animation-delay: 0.1s; }
+.share-button { animation-delay: 0.2s; }
+.install-button { animation-delay: 0.3s; }
+
+/* ============================================
+   INDICADOR DE OFFLINE
+   ============================================ */
+.offline-indicator {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--card-bg);
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    border: 2px solid var(--danger);
+    display: none;
+    align-items: center;
+    gap: 0.8rem;
+    z-index: 9999;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.offline-indicator.show {
+    display: flex;
+}
+
+.offline-indicator::before {
+    content: '📴';
+    font-size: 1.5rem;
+}
+
+/* ============================================
+   BADGE DE INSTALADO
+   ============================================ */
+.pwa-badge {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    background: var(--success);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 1001;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.pwa-mode .pwa-badge {
+    display: flex;
+}
+
+.pwa-badge::before {
+    content: '✓';
+}
+
+/* ============================================
+   MEJORAS DE ACCESIBILIDAD PARA BOTONES FLOTANTES
+   ============================================ */
+.theme-toggle:focus-visible,
+.sound-toggle:focus-visible,
+.share-button:focus-visible,
+.install-button:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 5px;
+}

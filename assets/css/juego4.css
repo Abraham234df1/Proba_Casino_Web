@@ -221,7 +221,108 @@ input[type=range] {
     filter: drop-shadow(0 0 2px var(--gold));
 }
 
+/* ============================================
+   RESPONSIVE - TABLETS
+   ============================================ */
+@media (max-width: 768px) {
+    .simulation-grid {
+        aspect-ratio: 1;
+    }
+    
+    .person {
+        font-size: 1.5rem;
+    }
+    
+    .control-group {
+        margin-bottom: 1rem;
+    }
+    
+    input[type="range"] {
+        width: 100%;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+}
+
+/* ============================================
+   RESPONSIVE - MOBILE
+   ============================================ */
 @media (max-width: 480px) {
-    .person { font-size: 1.4rem; }
-    .action-buttons { flex-direction: column; }
+    .simulation-header {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+        padding: 0.8rem;
+    }
+    
+    .stat-mini {
+        font-size: 0.95rem;
+    }
+    
+    .simulation-grid {
+        aspect-ratio: 1;
+        background-size: 10% 10%;
+    }
+    
+    .person { 
+        font-size: 1.4rem;
+        width: 10%;
+        height: 10%;
+    }
+    
+    .person.predicted::after {
+        font-size: 0.9rem;
+        top: -8px;
+        right: -3px;
+    }
+    
+    .control-group {
+        margin-bottom: 1rem;
+    }
+    
+    .control-label {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
+    
+    .control-label label {
+        font-size: 0.9rem;
+    }
+    
+    input[type="range"] {
+        width: 100%;
+    }
+    
+    .simulation-controls {
+        padding: 1rem;
+    }
+    
+    .terminal-box {
+        max-height: 120px;
+    }
+    
+    .terminal-text {
+        font-size: 0.75rem;
+    }
+    
+    .legend-item {
+        font-size: 0.85rem;
+        gap: 10px;
+        margin-bottom: 0.6rem;
+    }
+    
+    .legend-item span {
+        font-size: 1.2rem;
+    }
+    
+    .progress-info {
+        font-size: 0.9rem;
+    }
+    
+    .action-buttons { 
+        flex-direction: column;
+    }
 }

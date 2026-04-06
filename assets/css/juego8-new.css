@@ -1,0 +1,397 @@
+/* ===== JUEGO 8: TRAGAMONEDAS - LA ILUSIÓN DE LA PRECISIÓN ===== */
+
+.slot-machine {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    border: 3px solid var(--gold);
+}
+
+.machine-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.neon-sign {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--gold);
+    text-shadow: 
+        0 0 10px rgba(255, 183, 3, 0.8),
+        0 0 20px rgba(255, 183, 3, 0.6),
+        0 0 30px rgba(255, 183, 3, 0.4);
+    animation: neon-flicker 3s infinite alternate;
+}
+
+@keyframes neon-flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.9; }
+}
+
+/* Contenedor de rodillos */
+.reels-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 30px 0;
+    perspective: 1000px;
+}
+
+.reel-wrapper {
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    border: 4px solid var(--gold);
+    border-radius: 15px;
+    background: linear-gradient(180deg, #0a1128 0%, #1b263b 100%);
+    box-shadow: 
+        inset 0 5px 15px rgba(0, 0, 0, 0.5),
+        0 5px 20px rgba(255, 183, 3, 0.3);
+    position: relative;
+}
+
+.reel-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--gold);
+    z-index: 10;
+    transform: translateY(-50%);
+    box-shadow: 0 0 10px rgba(255, 183, 3, 0.8);
+}
+
+.reel {
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.1s ease-out;
+    transform: translateY(0);
+}
+
+.symbol {
+    width: 112px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    user-select: none;
+    background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 100%);
+}
+
+/* Resultado */
+.result-display {
+    text-align: center;
+    min-height: 60px;
+    margin: 25px 0;
+}
+
+.result-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 15px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 183, 3, 0.3);
+}
+
+.result-text .success {
+    color: var(--success);
+    font-size: 1.8rem;
+    animation: pulse-success 0.5s ease-in-out;
+}
+
+.result-text .near {
+    color: #ffa500;
+    font-size: 1.8rem;
+    animation: pulse-warning 0.5s ease-in-out;
+}
+
+.result-text .loss {
+    color: var(--danger);
+}
+
+@keyframes pulse-success {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes pulse-warning {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Controles */
+.controls {
+    text-align: center;
+    margin: 25px 0;
+}
+
+.btn-spin {
+    background: linear-gradient(135deg, var(--gold) 0%, #d4af37 100%);
+    color: #000;
+    border: none;
+    padding: 18px 50px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 5px 20px rgba(255, 183, 3, 0.4),
+        inset 0 -3px 10px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-spin:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 
+        0 8px 30px rgba(255, 183, 3, 0.6),
+        inset 0 -3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-spin:active:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+.btn-spin:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Balance */
+.balance-display {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 2px solid rgba(255, 183, 3, 0.2);
+}
+
+.balance-item {
+    text-align: center;
+    flex: 1;
+}
+
+.balance-item span:first-child {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.balance-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--gold);
+    display: block;
+}
+
+.balance-value.profit {
+    color: var(--success);
+}
+
+.balance-value.loss {
+    color: var(--danger);
+}
+
+/* Tabla de pagos */
+.paytable {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 30px;
+    border: 2px solid rgba(255, 183, 3, 0.2);
+}
+
+.paytable h3 {
+    text-align: center;
+    color: var(--gold);
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+}
+
+.paytable-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    margin: 8px 0;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border-left: 3px solid var(--gold);
+    transition: all 0.3s ease;
+}
+
+.paytable-row:hover {
+    background: rgba(255, 183, 3, 0.1);
+    transform: translateX(5px);
+}
+
+.paytable-row span:first-child {
+    font-size: 1.8rem;
+}
+
+.paytable-row .payout {
+    color: var(--gold);
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.paytable-note {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    padding: 10px;
+    background: rgba(255, 183, 3, 0.1);
+    border-radius: 8px;
+}
+
+/* Estadísticas */
+.near-miss-card {
+    border: 2px solid #ffa500;
+}
+
+.near-miss-card h3 {
+    color: #ffa500;
+}
+
+.probability-box {
+    background: linear-gradient(135deg, rgba(255, 183, 3, 0.1) 0%, rgba(255, 183, 3, 0.05) 100%);
+    padding: 20px;
+    border-radius: 12px;
+    border: 2px solid var(--gold);
+    margin-top: 20px;
+}
+
+.probability-box h4 {
+    color: var(--gold);
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.probability-box p {
+    font-size: 0.9rem;
+    margin: 8px 0;
+    text-align: center;
+}
+
+.prob-value {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.prob-value span {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--gold);
+}
+
+.prob-note {
+    font-size: 0.85rem !important;
+    color: var(--success) !important;
+    font-weight: bold;
+    margin-top: 15px !important;
+    padding: 10px;
+    background: rgba(76, 175, 80, 0.1);
+    border-radius: 8px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .reels-container {
+        gap: 10px;
+    }
+    
+    .reel-wrapper {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .symbol {
+        width: 82px;
+        height: 75px;
+        font-size: 3rem;
+    }
+    
+    .neon-sign {
+        font-size: 1.8rem;
+    }
+    
+    .btn-spin {
+        padding: 15px 35px;
+        font-size: 1.1rem;
+    }
+    
+    .balance-value {
+        font-size: 1.5rem;
+    }
+    
+    .paytable-row span:first-child {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .slot-machine {
+        padding: 20px;
+    }
+    
+    .reels-container {
+        gap: 8px;
+    }
+    
+    .reel-wrapper {
+        width: 75px;
+        height: 75px;
+    }
+    
+    .symbol {
+        width: 67px;
+        height: 63px;
+        font-size: 2.5rem;
+    }
+    
+    .neon-sign {
+        font-size: 1.5rem;
+    }
+    
+    .btn-spin {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+    
+    .balance-display {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .result-text {
+        font-size: 1.2rem;
+    }
+    
+    .paytable {
+        padding: 15px;
+    }
+    
+    .paytable-row {
+        padding: 8px 10px;
+    }
+    
+    .paytable-row span:first-child {
+        font-size: 1.2rem;
+    }
+    
+    .paytable-row .payout {
+        font-size: 0.95rem;
+    }
+}
