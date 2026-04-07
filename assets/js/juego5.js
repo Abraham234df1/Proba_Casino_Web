@@ -31,47 +31,68 @@ function initTombola() {
 // Función para mover las bolas individualmente con efectos mejorados
 function shuffleBalls() {
     const balls = document.querySelectorAll('.ball');
+    
     balls.forEach((ball, index) => {
         // Delay escalonado para cada bola (efecto cascada)
         setTimeout(() => {
-            // Primera posición intermedia (rebote)
-            const angle1 = Math.random() * Math.PI * 2;
-            const dist1 = Math.random() * 120 + 40;
-            const midX = Math.cos(angle1) * dist1;
-            const midY = Math.sin(angle1) * dist1;
+            // Generar 3 posiciones para movimiento en zigzag
+            const positions = [];
+            for (let i = 0; i < 3; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const dist = Math.random() * 120 + 40;
+                positions.push({
+                    x: Math.cos(angle) * dist,
+                    y: Math.sin(angle) * dist
+                });
+            }
             
-            // Posición final
-            const angle2 = Math.random() * Math.PI * 2;
-            const dist2 = Math.random() * 100 + 30;
-            const finalX = Math.cos(angle2) * dist2;
-            const finalY = Math.sin(angle2) * dist2;
-            
-            // Rotación aleatoria
-            const rotation = Math.random() * 720 - 360; // Entre -360 y 360 grados
+            // Rotaciones aleatorias más dramáticas
+            const rotations = [
+                Math.random() * 360 - 180,
+                Math.random() * 720 - 360,
+                Math.random() * 1080 - 540
+            ];
             
             // Añadir clase de movimiento
             ball.classList.add('moving');
             
-            // Primer movimiento (rebote intermedio)
-            ball.style.left = `calc(50% + ${midX}px - 10px)`;
-            ball.style.top = `calc(50% + ${midY}px - 10px)`;
-            ball.style.transform = `scale(1.3) rotate(${rotation/2}deg)`;
+            // Primera fase - explosión inicial
+            ball.style.transition = 'all 0.25s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+            ball.style.left = `calc(50% + ${positions[0].x}px - 10px)`;
+            ball.style.top = `calc(50% + ${positions[0].y}px - 10px)`;
+            ball.style.transform = `scale(1.4) rotate(${rotations[0]}deg)`;
+            ball.style.filter = 'brightness(1.5) saturate(1.5)';
             
-            // Segundo movimiento (posición final) con diferentes duraciones
-            const delay = 250 + Math.random() * 150;
+            // Segunda fase - rebote intermedio
             setTimeout(() => {
-                ball.style.left = `calc(50% + ${finalX}px - 10px)`;
-                ball.style.top = `calc(50% + ${finalY}px - 10px)`;
-                ball.style.transform = `scale(1) rotate(${rotation}deg)`;
+                ball.style.transition = 'all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                ball.style.left = `calc(50% + ${positions[1].x}px - 10px)`;
+                ball.style.top = `calc(50% + ${positions[1].y}px - 10px)`;
+                ball.style.transform = `scale(1.2) rotate(${rotations[1]}deg)`;
+            }, 250);
+            
+            // Tercera fase - posición final con rebote
+            setTimeout(() => {
+                ball.style.transition = 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                ball.style.left = `calc(50% + ${positions[2].x}px - 10px)`;
+                ball.style.top = `calc(50% + ${positions[2].y}px - 10px)`;
+                ball.style.transform = `scale(1.3) rotate(${rotations[2]}deg)`;
+            }, 600);
+            
+            // Cuarta fase - asentamiento final
+            setTimeout(() => {
+                ball.style.transition = 'all 0.3s ease-out';
+                ball.style.transform = `scale(1) rotate(${rotations[2]}deg)`;
+                ball.style.filter = 'brightness(1) saturate(1)';
                 
-                // Efecto de "asentamiento"
+                // Resetear después de asentarse
                 setTimeout(() => {
-                    ball.style.transform = `scale(1) rotate(0deg)`;
+                    ball.style.transform = 'scale(1) rotate(0deg)';
                     ball.classList.remove('moving');
                 }, 300);
-            }, delay);
+            }, 1000);
             
-        }, index * 40); // Cada bola empieza 40ms después de la anterior
+        }, index * 35); // Cada bola empieza 35ms después de la anterior
     });
 }
 
@@ -81,7 +102,19 @@ function vibrateContainer() {
     container.classList.add('shaking');
     setTimeout(() => {
         container.classList.remove('shaking');
-    }, 1500);
+    }, 1800);
+}
+
+// Función para crear ondas de impacto
+function createShockwave() {
+    const container = document.querySelector('.tombola');
+    const wave = document.createElement('div');
+    wave.className = 'shockwave';
+    container.appendChild(wave);
+    
+    setTimeout(() => {
+        wave.remove();
+    }, 1000);
 }
 
 function updateStats() {
@@ -108,11 +141,14 @@ async function attempt(isAuto = false) {
         // Efecto de vibración del contenedor
         vibrateContainer();
         
+        // Crear onda de impacto inicial
+        createShockwave();
+        
         // Mover las bolas individualmente a posiciones aleatorias con efectos
         shuffleBalls();
         
-        // Esperar a que terminen de moverse todas las bolas
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        // Esperar a que terminen de moverse todas las bolas (4 fases)
+        await new Promise(resolve => setTimeout(resolve, 2200));
     }
 
     attempts++;
@@ -125,12 +161,21 @@ async function attempt(isAuto = false) {
             // Efecto visual de bola dorada con explosión
             const balls = document.querySelectorAll('.ball');
             const luckyIdx = Math.floor(Math.random() * balls.length);
+            
+            // Añadir múltiples clases para efectos combinados
             balls[luckyIdx].classList.add('gold');
             balls[luckyIdx].classList.add('explode');
+            balls[luckyIdx].classList.add('winner-ball');
+            
+            // Crear ondas de victoria
+            createShockwave();
+            setTimeout(() => createShockwave(), 300);
+            
             setTimeout(() => {
                 balls[luckyIdx].classList.remove('explode');
-            }, 1000);
-            setTimeout(() => balls[luckyIdx].classList.remove('gold'), 3000);
+                balls[luckyIdx].classList.remove('winner-ball');
+            }, 1500);
+            setTimeout(() => balls[luckyIdx].classList.remove('gold'), 4000);
         }
     } else if (!isAuto) {
         msgBox.innerHTML = "Solo salieron bolas azules. Inténtalo de nuevo.";
