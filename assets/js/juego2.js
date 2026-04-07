@@ -22,6 +22,10 @@ const barGreen = document.getElementById('bar-green');
 const betButtons = document.querySelectorAll('.btn-bet');
 const retireBtn = document.getElementById('retire-btn');
 
+// Result Ball Elements
+const resultBall = document.getElementById('result-ball');
+const resultNumberEl = document.querySelector('.result-number');
+
 let balance = 100;
 const initialBalance = 100;
 let selectedBet = { type: null, value: null };
@@ -113,6 +117,7 @@ function updateUI() {
         msgBox.innerHTML = "<strong class='loss'>¡TE HAS QUEDADO SIN FICHAS!</strong> El casino siempre gana al final. ¿Quieres reintentar?";
         spinBtn.innerText = "Reiniciar";
         spinBtn.disabled = false;
+        resultBall.style.display = 'none'; // Hide result ball on game over
     }
 }
 
@@ -135,6 +140,7 @@ spinBtn.addEventListener('click', () => {
         balance = 100;
         updateUI();
         spinBtn.innerText = "¡Girar Ruleta!";
+        resultBall.style.display = 'none'; // Hide result ball on restart
         return;
     }
 
@@ -149,6 +155,7 @@ spinBtn.addEventListener('click', () => {
     isSpinning = true;
     spinBtn.disabled = true;
     ball.style.display = 'block';
+    resultBall.style.display = 'none'; // Hide previous result ball
     msgBox.innerText = "La bola está corriendo...";
 
     // Generate Result
@@ -156,25 +163,33 @@ spinBtn.addEventListener('click', () => {
     const resultNumber = rouletteOrder[resultIndex];
     const resultColor = getResultColor(resultNumber);
 
-    // Rotation Logic
+    // Rotation Logic - Simplified and corrected
     const segmentDeg = 360 / 37; // ~9.73 grados por segmento
     const extraSpins = 5 + Math.random() * 2; // 5-7 vueltas extra
-    
-    // El índice 0 está en 0° (3 en punto en el gradiente)
-    // El puntero está arriba (270°)
-    // Necesitamos rotar para que el centro del segmento ganador quede en 270°
-    
-    const segmentCenterAngle = (resultIndex * segmentDeg) + (segmentDeg / 2);
-    const targetPosition = 270; // Posición del puntero (arriba)
-    const rotationNeeded = segmentCenterAngle - targetPosition;
-    
-    const totalRotation = (360 * extraSpins) + rotationNeeded;
-    currentRotation += totalRotation;
-    
-    wheel.style.transform = `rotate(-${currentRotation}deg)`;
 
-    setTimeout(() => {
-        isSpinning = false;
+    // Calculate how much to rotate so the winning number ends up under the pointer (270°)
+    // The pointer is at 270°, numbers are positioned at their segment centers
+    const winningSegmentCenter = (resultIndex * segmentDeg) + (segmentDeg / 2);
+
+    // To bring the winning segment to 270°, we need to rotate by (270 - winningSegmentCenter)
+    // But since CSS rotate() is clockwise, and we want the wheel to spin counterclockwise like real roulette,
+    // we use negative rotation
+    const rotationToWinningPosition = 270 - winningSegmentCenter;
+
+    // Normalize to shortest rotation (-180 to 180)
+    let normalizedRotation = rotationToWinningPosition;
+    while (normalizedRotation > 180) normalizedRotation -= 360;
+    while (normalizedRotation < -180) normalizedRotation += 360;
+
+    const totalRotation = (360 * extraSpins) - normalizedRotation; // Negative because we want counterclockwise spin
+    currentRotation += totalRotation;
+
+        
+        // Show result ball with winning number
+        resultNumberEl.textContent = resultNumber;
+        resultBall.style.display = 'flex';
+        resultBall.className = `result-ball ${resultColor}`;
+        
         const won = checkWin(resultNumber, selectedBet);
         
         if (won) {
