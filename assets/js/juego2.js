@@ -171,7 +171,7 @@ spinBtn.addEventListener('click', () => {
     const totalRotation = (360 * extraSpins) + rotationNeeded;
     currentRotation += totalRotation;
     
-    wheel.style.transform = `rotate(${currentRotation}deg)`;
+    wheel.style.transform = `rotate(-${currentRotation}deg)`;
 
     setTimeout(() => {
         isSpinning = false;
