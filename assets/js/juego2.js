@@ -181,10 +181,14 @@ spinBtn.addEventListener('click', () => {
     while (normalizedRotation > 180) normalizedRotation -= 360;
     while (normalizedRotation < -180) normalizedRotation += 360;
 
-    const totalRotation = (360 * extraSpins) - normalizedRotation; // Negative because we want counterclockwise spin
+    const totalRotation = (360 * extraSpins) - normalizedRotation; // Counterclockwise spin
     currentRotation += totalRotation;
 
-        
+    wheel.style.transform = `rotate(${currentRotation}deg)`;
+
+    setTimeout(() => {
+        isSpinning = false;
+
         // Show result ball with winning number
         resultNumberEl.textContent = resultNumber;
         resultBall.style.display = 'flex';
