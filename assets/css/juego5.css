@@ -11,16 +11,16 @@
     transition: transform 0.1s ease;
 }
 
-/* Efecto de vibración del contenedor */
+/* Efecto de vibración suave del contenedor */
 .tombola-container.shaking {
-    animation: shake 0.15s ease-in-out infinite;
+    animation: shake 0.08s ease-in-out 12;
 }
 
 @keyframes shake {
-    0%, 100% { transform: translate(0, 0) rotate(0deg); }
-    25% { transform: translate(-2px, 2px) rotate(-0.5deg); }
-    50% { transform: translate(2px, -2px) rotate(0.5deg); }
-    75% { transform: translate(-2px, -2px) rotate(-0.5deg); }
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(-1px, 1px); }
+    50% { transform: translate(1px, -1px); }
+    75% { transform: translate(-1px, -1px); }
 }
 
 .tombola {
@@ -42,25 +42,12 @@
 }
 
 .ball.moving {
-    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     box-shadow: 
         inset -2px -2px 5px rgba(0,0,0,0.5), 
-        0 4px 15px rgba(90, 122, 153, 0.6),
-        0 0 20px rgba(90, 122, 153, 0.4);
-    filter: brightness(1.3);
-    animation: colorShift 0.5s ease-in-out infinite alternate;
-}
-
-@keyframes colorShift {
-    0% {
-        background: radial-gradient(circle at 30% 30%, #5a7a99, #415a77);
-    }
-    50% {
-        background: radial-gradient(circle at 30% 30%, #6a8aa9, #516a87);
-    }
-    100% {
-        background: radial-gradient(circle at 30% 30%, #7a9ab9, #617a97);
-    }
+        0 3px 12px rgba(90, 122, 153, 0.5),
+        0 0 15px rgba(90, 122, 153, 0.3);
+    filter: brightness(1.15);
 }
 
 .ball:hover {
@@ -74,68 +61,31 @@
 
 .ball.gold {
     background: radial-gradient(circle at 30% 30%, #ffd700, var(--gold), #b8860b);
-    box-shadow: 0 0 25px var(--gold), inset 2px 2px 5px rgba(255,255,255,0.5);
+    box-shadow: 0 0 20px var(--gold), inset 2px 2px 5px rgba(255,255,255,0.5);
     width: 25px;
     height: 25px;
     z-index: 100;
-    animation: goldPulse 0.5s ease-in-out infinite;
+    animation: goldPulseSmooth 1.2s ease-in-out infinite;
 }
 
-@keyframes goldPulse {
+@keyframes goldPulseSmooth {
     0%, 100% { 
-        transform: scale(1) rotate(0deg); 
+        transform: scale(1); 
         box-shadow: 
-            0 0 25px var(--gold),
-            0 0 40px rgba(255, 215, 0, 0.5),
+            0 0 20px var(--gold),
+            0 0 30px rgba(255, 215, 0, 0.4),
             inset 2px 2px 5px rgba(255,255,255,0.5);
     }
     50% { 
-        transform: scale(1.2) rotate(180deg); 
+        transform: scale(1.12); 
         box-shadow: 
-            0 0 40px var(--gold), 
-            0 0 60px rgba(255, 215, 0, 0.8),
-            0 0 80px rgba(255, 215, 0, 0.4),
-            inset 2px 2px 8px rgba(255,255,255,0.8);
+            0 0 25px var(--gold), 
+            0 0 40px rgba(255, 215, 0, 0.5),
+            inset 2px 2px 6px rgba(255,255,255,0.6);
     }
 }
 
-/* Efecto de explosión cuando aparece la bola dorada */
-.ball.explode {
-    animation: explode 1.5s ease-out;
-}
-
-@keyframes explode {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-        box-shadow: 0 0 20px var(--gold);
-    }
-    20% {
-        transform: scale(3);
-        opacity: 0.8;
-        box-shadow: 
-            0 0 60px var(--gold),
-            0 0 120px rgba(255, 215, 0, 0.8),
-            0 0 180px rgba(255, 215, 0, 0.5);
-    }
-    40% {
-        transform: scale(1.5) rotate(180deg);
-        opacity: 0.9;
-    }
-    60% {
-        transform: scale(2.5) rotate(270deg);
-        opacity: 0.7;
-    }
-    80% {
-        transform: scale(1.2) rotate(360deg);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-        box-shadow: 0 0 25px var(--gold);
-    }
-}
+/* Efecto de explosión suave cuando aparece la bola dorada - REMOVIDO para más naturalidad */
 
 .action-buttons {
     display: flex;
@@ -148,126 +98,101 @@
     .tombola-container { width: 250px; height: 250px; }
 }
 
-/* Efecto de estela para bolitas en movimiento */
+/* Efecto de estela suave para bolitas en movimiento */
 .ball.moving::after {
     content: '';
     position: absolute;
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(90, 122, 153, 0.6), transparent);
+    background: radial-gradient(circle, rgba(90, 122, 153, 0.4), transparent);
     top: 0;
     left: 0;
-    animation: trail 0.6s ease-out infinite;
+    animation: trailSmooth 0.8s ease-out infinite;
     pointer-events: none;
 }
 
-@keyframes trail {
+@keyframes trailSmooth {
     0% {
         transform: scale(1);
-        opacity: 0.8;
-    }
-    100% {
-        transform: scale(2.5);
-        opacity: 0;
-    }
-}
-
-/* Múltiples estelas para efecto más dramático */
-.ball.moving::before {
-    content: '';
-    position: absolute;
-    width: 120%;
-    height: 120%;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(90, 122, 153, 0.4), transparent);
-    top: -10%;
-    left: -10%;
-    animation: trailSecondary 0.8s ease-out infinite;
-    pointer-events: none;
-}
-
-@keyframes trailSecondary {
-    0% {
-        transform: scale(1) rotate(0deg);
         opacity: 0.6;
     }
     100% {
-        transform: scale(3) rotate(180deg);
+        transform: scale(2);
         opacity: 0;
     }
 }
 
-/* Efecto de partículas cuando la bola dorada aparece */
+/* Efecto de partículas suaves para la bola dorada */
 .ball.gold::before {
     content: '';
     position: absolute;
-    width: 150%;
-    height: 150%;
+    width: 140%;
+    height: 140%;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 215, 0, 0.3), transparent 70%);
-    top: -25%;
-    left: -25%;
-    animation: particles 1s ease-out infinite;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.2), transparent 70%);
+    top: -20%;
+    left: -20%;
+    animation: particlesSmooth 1.5s ease-out infinite;
     pointer-events: none;
 }
 
-@keyframes particles {
+@keyframes particlesSmooth {
     0% {
-        transform: scale(0.8) rotate(0deg);
-        opacity: 1;
+        transform: scale(0.9) rotate(0deg);
+        opacity: 0.8;
     }
     100% {
-        transform: scale(2) rotate(360deg);
+        transform: scale(1.6) rotate(180deg);
         opacity: 0;
     }
 }
 
-/* Onda de impacto */
+/* Onda de impacto suave */
 .shockwave {
     position: absolute;
-    width: 30px;
-    height: 30px;
-    border: 3px solid rgba(255, 183, 3, 0.8);
+    width: 40px;
+    height: 40px;
+    border: 2px solid rgba(255, 183, 3, 0.5);
     border-radius: 50%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    animation: shockwaveExpand 1s ease-out;
+    animation: shockwaveSmooth 1.2s ease-out;
     pointer-events: none;
     z-index: 50;
 }
 
-@keyframes shockwaveExpand {
+@keyframes shockwaveSmooth {
     0% {
-        width: 30px;
-        height: 30px;
-        opacity: 1;
-        border-width: 4px;
-    }
-    50% {
-        opacity: 0.6;
+        width: 40px;
+        height: 40px;
+        opacity: 0.8;
         border-width: 2px;
     }
-    100% {
-        width: 320px;
-        height: 320px;
-        opacity: 0;
+    70% {
+        opacity: 0.3;
         border-width: 1px;
     }
+    100% {
+        width: 280px;
+        height: 280px;
+        opacity: 0;
+        border-width: 0.5px;
+    }
 }
 
-/* Bola ganadora con efecto especial */
+/* Bola ganadora con efecto suave */
 .ball.winner-ball {
-    animation: winnerSpin 0.5s ease-in-out infinite;
-    z-index: 150 !important;
+    animation: winnerGlow 1s ease-in-out infinite;
+    z-index: 120 !important;
 }
 
-@keyframes winnerSpin {
+@keyframes winnerGlow {
     0%, 100% {
-        filter: brightness(2) saturate(2) hue-rotate(0deg);
+        filter: brightness(1.3) saturate(1.4);
     }
     50% {
-        filter: brightness(2.5) saturate(2.5) hue-rotate(30deg);
+        filter: brightness(1.6) saturate(1.7);
     }
 }
