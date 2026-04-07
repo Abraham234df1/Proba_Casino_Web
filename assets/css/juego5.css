@@ -23,7 +23,13 @@
     position: absolute;
     background: radial-gradient(circle at 30% 30%, #5a7a99, #415a77);
     box-shadow: inset -2px -2px 5px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3);
-    transition: all 0.3s ease;
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: pointer;
+}
+
+.ball:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
 }
 
 .ball.gold {
@@ -37,57 +43,8 @@
 
 @keyframes goldPulse {
     0%, 100% { transform: scale(1); box-shadow: 0 0 20px var(--gold); }
-    50% { transform: scale(1.1); box-shadow: 0 0 30px var(--gold); }
+    50% { transform: scale(1.15); box-shadow: 0 0 35px var(--gold), 0 0 50px rgba(255, 215, 0, 0.5); }
 }
-
-/* Animaciones individuales para cada bola */
-.ball.spinning {
-    animation: ballFloat 2s ease-in-out infinite;
-}
-
-/* Cada bola tendrá su propia animación con diferentes duraciones y delays */
-.ball:nth-child(1).spinning { animation: ballFloat1 1.2s ease-in-out infinite; }
-.ball:nth-child(2).spinning { animation: ballFloat2 1.5s ease-in-out infinite; }
-.ball:nth-child(3).spinning { animation: ballFloat3 1.3s ease-in-out infinite; }
-.ball:nth-child(4).spinning { animation: ballFloat4 1.7s ease-in-out infinite; }
-.ball:nth-child(5).spinning { animation: ballFloat5 1.4s ease-in-out infinite; }
-.ball:nth-child(6).spinning { animation: ballFloat6 1.6s ease-in-out infinite; }
-.ball:nth-child(7).spinning { animation: ballFloat7 1.35s ease-in-out infinite; }
-.ball:nth-child(8).spinning { animation: ballFloat8 1.55s ease-in-out infinite; }
-.ball:nth-child(9).spinning { animation: ballFloat9 1.25s ease-in-out infinite; }
-.ball:nth-child(10).spinning { animation: ballFloat10 1.65s ease-in-out infinite; }
-.ball:nth-child(11).spinning { animation: ballFloat11 1.45s ease-in-out infinite; }
-.ball:nth-child(12).spinning { animation: ballFloat12 1.75s ease-in-out infinite; }
-.ball:nth-child(13).spinning { animation: ballFloat13 1.32s ease-in-out infinite; }
-.ball:nth-child(14).spinning { animation: ballFloat14 1.58s ease-in-out infinite; }
-.ball:nth-child(15).spinning { animation: ballFloat15 1.42s ease-in-out infinite; }
-.ball:nth-child(16).spinning { animation: ballFloat16 1.68s ease-in-out infinite; }
-.ball:nth-child(17).spinning { animation: ballFloat17 1.38s ease-in-out infinite; }
-.ball:nth-child(18).spinning { animation: ballFloat18 1.52s ease-in-out infinite; }
-.ball:nth-child(19).spinning { animation: ballFloat19 1.48s ease-in-out infinite; }
-.ball:nth-child(20).spinning { animation: ballFloat20 1.62s ease-in-out infinite; }
-
-/* Keyframes para movimientos únicos */
-@keyframes ballFloat1 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(15px, -20px); } }
-@keyframes ballFloat2 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-20px, 18px); } }
-@keyframes ballFloat3 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(22px, 15px); } }
-@keyframes ballFloat4 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-18px, -22px); } }
-@keyframes ballFloat5 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(25px, -10px); } }
-@keyframes ballFloat6 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-15px, 25px); } }
-@keyframes ballFloat7 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(18px, 20px); } }
-@keyframes ballFloat8 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-25px, -15px); } }
-@keyframes ballFloat9 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(12px, -25px); } }
-@keyframes ballFloat10 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-22px, 12px); } }
-@keyframes ballFloat11 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(20px, -18px); } }
-@keyframes ballFloat12 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-12px, 20px); } }
-@keyframes ballFloat13 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(16px, 22px); } }
-@keyframes ballFloat14 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-20px, -16px); } }
-@keyframes ballFloat15 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(24px, 14px); } }
-@keyframes ballFloat16 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-14px, -24px); } }
-@keyframes ballFloat17 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(19px, -12px); } }
-@keyframes ballFloat18 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-16px, 19px); } }
-@keyframes ballFloat19 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(13px, -19px); } }
-@keyframes ballFloat20 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-19px, 13px); } }
 
 .action-buttons {
     display: flex;

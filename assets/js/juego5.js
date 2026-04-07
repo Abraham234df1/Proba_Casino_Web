@@ -23,8 +23,29 @@ function initTombola() {
         const dist = Math.random() * 100 + 30; // Más espacio para distribuir
         ball.style.left = `calc(50% + ${Math.cos(angle) * dist}px - 10px)`;
         ball.style.top = `calc(50% + ${Math.sin(angle) * dist}px - 10px)`;
+        ball.style.transition = 'all 0.6s ease-out'; // Transición suave
         tombola.appendChild(ball);
     }
+}
+
+// Función para mover las bolas individualmente
+function shuffleBalls() {
+    const balls = document.querySelectorAll('.ball');
+    balls.forEach((ball, index) => {
+        // Delay escalonado para cada bola (efecto cascada)
+        setTimeout(() => {
+            const angle = Math.random() * Math.PI * 2;
+            const dist = Math.random() * 100 + 30;
+            ball.style.left = `calc(50% + ${Math.cos(angle) * dist}px - 10px)`;
+            ball.style.top = `calc(50% + ${Math.sin(angle) * dist}px - 10px)`;
+            
+            // Añadir un pequeño efecto de escala durante el movimiento
+            ball.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                ball.style.transform = 'scale(1)';
+            }, 200);
+        }, index * 50); // Cada bola empieza a moverse 50ms después de la anterior
+    });
 }
 
 function updateStats() {
@@ -48,12 +69,11 @@ async function attempt(isAuto = false) {
         spin1Btn.disabled = true;
         msgBox.innerText = "¡Girando la tómbola!";
         
-        // Animación de giro - cada bola se mueve individualmente
-        const balls = document.querySelectorAll('.ball');
-        balls.forEach(b => b.classList.add('spinning'));
+        // Mover las bolas individualmente a posiciones aleatorias
+        shuffleBalls();
         
-        await new Promise(resolve => setTimeout(resolve, 1500)); // Mayor duración para ver el efecto
-        balls.forEach(b => b.classList.remove('spinning'));
+        // Esperar a que terminen de moverse todas las bolas
+        await new Promise(resolve => setTimeout(resolve, 1500));
     }
 
     attempts++;
