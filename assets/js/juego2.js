@@ -163,26 +163,20 @@ spinBtn.addEventListener('click', () => {
     const resultNumber = rouletteOrder[resultIndex];
     const resultColor = getResultColor(resultNumber);
 
-    // Rotation Logic - Simplified and corrected
+    // Rotation Logic - Corrected
     const segmentDeg = 360 / 37; // ~9.73 grados por segmento
     const extraSpins = 5 + Math.random() * 2; // 5-7 vueltas extra
 
-    // Calculate how much to rotate so the winning number ends up under the pointer (270°)
-    // The pointer is at 270°, numbers are positioned at their segment centers
+    // Calculate the angle where the winning number currently is
     const winningSegmentCenter = (resultIndex * segmentDeg) + (segmentDeg / 2);
 
-    // To bring the winning segment to 270°, we need to rotate by (270 - winningSegmentCenter)
-    // But since CSS rotate() is clockwise, and we want the wheel to spin counterclockwise like real roulette,
-    // we use negative rotation
-    const rotationToWinningPosition = 270 - winningSegmentCenter;
-
-    // Normalize to shortest rotation (-180 to 180)
-    let normalizedRotation = rotationToWinningPosition;
-    while (normalizedRotation > 180) normalizedRotation -= 360;
-    while (normalizedRotation < -180) normalizedRotation += 360;
-
-    const totalRotation = (360 * extraSpins) - normalizedRotation; // Counterclockwise spin
-    currentRotation += totalRotation;
+    // The pointer is at the top (0°). We want the winning segment to end up there.
+    // We need to rotate the wheel so that the winning segment aligns with 0° (top)
+    // Since the wheel rotates clockwise in CSS, and we want dramatic effect:
+    const targetRotation = -winningSegmentCenter + (360 * extraSpins);
+    
+    // Add to current rotation for continuous spinning effect
+    currentRotation += targetRotation;
 
     wheel.style.transform = `rotate(${currentRotation}deg)`;
 
@@ -196,13 +190,16 @@ spinBtn.addEventListener('click', () => {
         
         const won = checkWin(resultNumber, selectedBet);
         
+        // Primero restar la apuesta
+        balance -= betAmount;
+        
         if (won) {
-            let multiplier = (selectedBet.type === 'green') ? 35 : 1;
+            let multiplier = (selectedBet.type === 'green') ? 36 : 2;
             const prize = betAmount * multiplier;
             balance += prize;
-            msgBox.innerHTML = `¡Cayó el ${resultNumber} (${resultColor})! <span class='profit'>Ganaste ${prize} fichas.</span>`;
+            const profit = prize - betAmount;
+            msgBox.innerHTML = `¡Cayó el ${resultNumber} (${resultColor})! <span class='profit'>Ganaste ${profit} fichas.</span>`;
         } else {
-            balance -= betAmount;
             msgBox.innerHTML = `Cayó el ${resultNumber} (${resultColor}). <span class='loss'>Perdiste ${betAmount} fichas.</span>`;
         }
 
