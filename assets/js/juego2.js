@@ -161,12 +161,12 @@ spinBtn.addEventListener('click', () => {
     const extraSpins = 5 + Math.random() * 2; // 5-7 vueltas extra
     
     // El índice 0 está en 0° (3 en punto en el gradiente)
-    // El puntero está arriba (-90° o 270°)
+    // El puntero está arriba (270°)
     // Necesitamos rotar para que el centro del segmento ganador quede en 270°
     
     const segmentCenterAngle = (resultIndex * segmentDeg) + (segmentDeg / 2);
     const targetPosition = 270; // Posición del puntero (arriba)
-    const rotationNeeded = targetPosition - segmentCenterAngle;
+    const rotationNeeded = segmentCenterAngle - targetPosition;
     
     const totalRotation = (360 * extraSpins) + rotationNeeded;
     currentRotation += totalRotation;
