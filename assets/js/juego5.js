@@ -28,55 +28,55 @@ function initTombola() {
     }
 }
 
-// Función para mover las bolas individualmente con máxima suavidad
+// Función para mover las bolas individualmente con máxima suavidad extrema
 function shuffleBalls() {
     const balls = document.querySelectorAll('.ball');
     
     balls.forEach((ball, index) => {
-        // Delay más espaciado para movimiento más suave
+        // Delay más espaciado para movimiento más fluido
         setTimeout(() => {
-            // Movimiento suave en una sola fase fluida
+            // Movimiento ultra suave en una sola fase
             const angle = Math.random() * Math.PI * 2;
             const dist = Math.random() * 95 + 35;
             const finalX = Math.cos(angle) * dist;
             const finalY = Math.sin(angle) * dist;
             
-            // Rotación muy sutil
-            const rotation = Math.random() * 60 - 30; // Entre -30 y 30 grados
+            // Rotación extremadamente sutil
+            const rotation = Math.random() * 20 - 10; // Entre -10 y 10 grados
             
             // Añadir clase de movimiento
             ball.classList.add('moving');
             
-            // Movimiento ultra suave y lento
-            ball.style.transition = 'all 1.2s cubic-bezier(0.23, 1, 0.32, 1)';
+            // Movimiento extremadamente suave y muy lento
+            ball.style.transition = 'all 2s cubic-bezier(0.16, 1, 0.3, 1)';
             ball.style.left = `calc(50% + ${finalX}px - 10px)`;
             ball.style.top = `calc(50% + ${finalY}px - 10px)`;
-            ball.style.transform = `scale(1.08) rotate(${rotation}deg)`;
+            ball.style.transform = `scale(1.05) rotate(${rotation}deg)`;
             
-            // Asentamiento ultra suave
+            // Asentamiento extremadamente suave
             setTimeout(() => {
-                ball.style.transition = 'all 0.8s cubic-bezier(0.23, 1, 0.32, 1)';
+                ball.style.transition = 'all 1.2s cubic-bezier(0.16, 1, 0.3, 1)';
                 ball.style.transform = 'scale(1) rotate(0deg)';
                 
                 setTimeout(() => {
                     ball.classList.remove('moving');
-                }, 800);
-            }, 1200);
+                }, 1200);
+            }, 2000);
             
-        }, index * 60); // Delay más largo entre bolas para efecto más fluido
+        }, index * 75); // Delay más largo entre bolas para efecto ultra fluido
     });
 }
 
-// Función para añadir efecto de vibración muy suave a la tómbola
+// Función para añadir efecto de vibración extremadamente suave a la tómbola
 function vibrateContainer() {
     const container = document.querySelector('.tombola-container');
     container.classList.add('shaking');
     setTimeout(() => {
         container.classList.remove('shaking');
-    }, 1600);
+    }, 1800);
 }
 
-// Función para crear onda ultra suave de impacto
+// Función para crear onda extremadamente suave de impacto
 function createShockwave() {
     const container = document.querySelector('.tombola');
     const wave = document.createElement('div');
@@ -85,7 +85,7 @@ function createShockwave() {
     
     setTimeout(() => {
         wave.remove();
-    }, 1500);
+    }, 2000);
 }
 
 function updateStats() {
@@ -109,17 +109,17 @@ async function attempt(isAuto = false) {
         spin1Btn.disabled = true;
         msgBox.innerText = "¡Girando la tómbola!";
         
-        // Efecto de vibración ultra suave del contenedor
+        // Efecto de vibración extremadamente suave del contenedor
         vibrateContainer();
         
-        // Crear onda de impacto ultra sutil
+        // Crear onda de impacto extremadamente sutil
         createShockwave();
         
-        // Mover las bolas con máxima suavidad
+        // Mover las bolas con máxima suavidad extrema
         shuffleBalls();
         
-        // Esperar más tiempo para ver el movimiento completo y suave
-        await new Promise(resolve => setTimeout(resolve, 2600));
+        // Esperar más tiempo para disfrutar el movimiento lento y suave
+        await new Promise(resolve => setTimeout(resolve, 3700));
     }
 
     attempts++;
@@ -129,21 +129,21 @@ async function attempt(isAuto = false) {
         wins++;
         if (!isAuto) {
             msgBox.innerHTML = "<span class='success'>¡ENCONTRASTE LA BOLA DORADA!</span> La suerte te sonrió esta vez.";
-            // Efecto visual ultra suave de bola dorada
+            // Efecto visual extremadamente suave de bola dorada
             const balls = document.querySelectorAll('.ball');
             const luckyIdx = Math.floor(Math.random() * balls.length);
             
-            // Añadir clases con efectos ultra suaves
+            // Añadir clases con efectos extremadamente suaves
             balls[luckyIdx].classList.add('gold');
             balls[luckyIdx].classList.add('winner-ball');
             
-            // Onda de victoria ultra suave
-            setTimeout(() => createShockwave(), 300);
+            // Onda de victoria extremadamente suave
+            setTimeout(() => createShockwave(), 400);
             
             setTimeout(() => {
                 balls[luckyIdx].classList.remove('winner-ball');
-            }, 2500);
-            setTimeout(() => balls[luckyIdx].classList.remove('gold'), 5000);
+            }, 3000);
+            setTimeout(() => balls[luckyIdx].classList.remove('gold'), 6000);
         }
     } else if (!isAuto) {
         msgBox.innerHTML = "Solo salieron bolas azules. Inténtalo de nuevo.";
