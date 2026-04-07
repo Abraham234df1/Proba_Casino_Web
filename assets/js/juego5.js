@@ -18,9 +18,9 @@ function initTombola() {
     for (let i = 0; i < 20; i++) {
         const ball = document.createElement('div');
         ball.className = 'ball';
-        // Posición aleatoria inicial
+        // Posición aleatoria inicial distribuida por toda la tómbola
         const angle = Math.random() * Math.PI * 2;
-        const dist = Math.random() * 80 + 20;
+        const dist = Math.random() * 100 + 30; // Más espacio para distribuir
         ball.style.left = `calc(50% + ${Math.cos(angle) * dist}px - 10px)`;
         ball.style.top = `calc(50% + ${Math.sin(angle) * dist}px - 10px)`;
         tombola.appendChild(ball);
@@ -48,11 +48,11 @@ async function attempt(isAuto = false) {
         spin1Btn.disabled = true;
         msgBox.innerText = "¡Girando la tómbola!";
         
-        // Animación de giro
+        // Animación de giro - cada bola se mueve individualmente
         const balls = document.querySelectorAll('.ball');
         balls.forEach(b => b.classList.add('spinning'));
         
-        await new Promise(resolve => setTimeout(resolve, 800));
+        await new Promise(resolve => setTimeout(resolve, 1500)); // Mayor duración para ver el efecto
         balls.forEach(b => b.classList.remove('spinning'));
     }
 
