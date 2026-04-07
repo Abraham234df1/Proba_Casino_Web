@@ -28,24 +28,60 @@ function initTombola() {
     }
 }
 
-// Función para mover las bolas individualmente
+// Función para mover las bolas individualmente con efectos mejorados
 function shuffleBalls() {
     const balls = document.querySelectorAll('.ball');
     balls.forEach((ball, index) => {
         // Delay escalonado para cada bola (efecto cascada)
         setTimeout(() => {
-            const angle = Math.random() * Math.PI * 2;
-            const dist = Math.random() * 100 + 30;
-            ball.style.left = `calc(50% + ${Math.cos(angle) * dist}px - 10px)`;
-            ball.style.top = `calc(50% + ${Math.sin(angle) * dist}px - 10px)`;
+            // Primera posición intermedia (rebote)
+            const angle1 = Math.random() * Math.PI * 2;
+            const dist1 = Math.random() * 120 + 40;
+            const midX = Math.cos(angle1) * dist1;
+            const midY = Math.sin(angle1) * dist1;
             
-            // Añadir un pequeño efecto de escala durante el movimiento
-            ball.style.transform = 'scale(1.2)';
+            // Posición final
+            const angle2 = Math.random() * Math.PI * 2;
+            const dist2 = Math.random() * 100 + 30;
+            const finalX = Math.cos(angle2) * dist2;
+            const finalY = Math.sin(angle2) * dist2;
+            
+            // Rotación aleatoria
+            const rotation = Math.random() * 720 - 360; // Entre -360 y 360 grados
+            
+            // Añadir clase de movimiento
+            ball.classList.add('moving');
+            
+            // Primer movimiento (rebote intermedio)
+            ball.style.left = `calc(50% + ${midX}px - 10px)`;
+            ball.style.top = `calc(50% + ${midY}px - 10px)`;
+            ball.style.transform = `scale(1.3) rotate(${rotation/2}deg)`;
+            
+            // Segundo movimiento (posición final) con diferentes duraciones
+            const delay = 250 + Math.random() * 150;
             setTimeout(() => {
-                ball.style.transform = 'scale(1)';
-            }, 200);
-        }, index * 50); // Cada bola empieza a moverse 50ms después de la anterior
+                ball.style.left = `calc(50% + ${finalX}px - 10px)`;
+                ball.style.top = `calc(50% + ${finalY}px - 10px)`;
+                ball.style.transform = `scale(1) rotate(${rotation}deg)`;
+                
+                // Efecto de "asentamiento"
+                setTimeout(() => {
+                    ball.style.transform = `scale(1) rotate(0deg)`;
+                    ball.classList.remove('moving');
+                }, 300);
+            }, delay);
+            
+        }, index * 40); // Cada bola empieza 40ms después de la anterior
     });
+}
+
+// Función para añadir efecto de vibración a la tómbola
+function vibrateContainer() {
+    const container = document.querySelector('.tombola-container');
+    container.classList.add('shaking');
+    setTimeout(() => {
+        container.classList.remove('shaking');
+    }, 1500);
 }
 
 function updateStats() {
@@ -69,11 +105,14 @@ async function attempt(isAuto = false) {
         spin1Btn.disabled = true;
         msgBox.innerText = "¡Girando la tómbola!";
         
-        // Mover las bolas individualmente a posiciones aleatorias
+        // Efecto de vibración del contenedor
+        vibrateContainer();
+        
+        // Mover las bolas individualmente a posiciones aleatorias con efectos
         shuffleBalls();
         
         // Esperar a que terminen de moverse todas las bolas
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        await new Promise(resolve => setTimeout(resolve, 2000));
     }
 
     attempts++;
@@ -83,11 +122,15 @@ async function attempt(isAuto = false) {
         wins++;
         if (!isAuto) {
             msgBox.innerHTML = "<span class='success'>¡ENCONTRASTE LA BOLA DORADA!</span> La suerte te sonrió esta vez.";
-            // Efecto visual de bola dorada
+            // Efecto visual de bola dorada con explosión
             const balls = document.querySelectorAll('.ball');
             const luckyIdx = Math.floor(Math.random() * balls.length);
             balls[luckyIdx].classList.add('gold');
-            setTimeout(() => balls[luckyIdx].classList.remove('gold'), 2000);
+            balls[luckyIdx].classList.add('explode');
+            setTimeout(() => {
+                balls[luckyIdx].classList.remove('explode');
+            }, 1000);
+            setTimeout(() => balls[luckyIdx].classList.remove('gold'), 3000);
         }
     } else if (!isAuto) {
         msgBox.innerHTML = "Solo salieron bolas azules. Inténtalo de nuevo.";
