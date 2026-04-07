@@ -11,16 +11,16 @@
     transition: transform 0.1s ease;
 }
 
-/* Efecto de vibración suave del contenedor */
+/* Efecto de vibración ultra suave del contenedor */
 .tombola-container.shaking {
-    animation: shake 0.08s ease-in-out 12;
+    animation: shakeUltraSmooth 0.12s ease-in-out 10;
 }
 
-@keyframes shake {
+@keyframes shakeUltraSmooth {
     0%, 100% { transform: translate(0, 0); }
-    25% { transform: translate(-1px, 1px); }
-    50% { transform: translate(1px, -1px); }
-    75% { transform: translate(-1px, -1px); }
+    25% { transform: translate(-0.5px, 0.5px); }
+    50% { transform: translate(0.5px, -0.5px); }
+    75% { transform: translate(-0.5px, -0.5px); }
 }
 
 .tombola {
@@ -36,51 +36,52 @@
     position: absolute;
     background: radial-gradient(circle at 30% 30%, #5a7a99, #415a77);
     box-shadow: inset -2px -2px 5px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3);
-    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
     cursor: pointer;
     z-index: 1;
 }
 
 .ball.moving {
-    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1);
     box-shadow: 
         inset -2px -2px 5px rgba(0,0,0,0.5), 
-        0 3px 12px rgba(90, 122, 153, 0.5),
-        0 0 15px rgba(90, 122, 153, 0.3);
-    filter: brightness(1.15);
+        0 2px 10px rgba(90, 122, 153, 0.4),
+        0 0 12px rgba(90, 122, 153, 0.25);
+    filter: brightness(1.1);
 }
 
 .ball:hover {
-    transform: scale(1.15);
-    filter: brightness(1.3);
+    transform: scale(1.08);
+    filter: brightness(1.2);
+    transition: all 0.4s ease-out;
     box-shadow: 
         inset -2px -2px 5px rgba(0,0,0,0.5), 
         0 2px 8px rgba(0,0,0,0.3),
-        0 0 15px rgba(90, 122, 153, 0.5);
+        0 0 12px rgba(90, 122, 153, 0.4);
 }
 
 .ball.gold {
     background: radial-gradient(circle at 30% 30%, #ffd700, var(--gold), #b8860b);
-    box-shadow: 0 0 20px var(--gold), inset 2px 2px 5px rgba(255,255,255,0.5);
+    box-shadow: 0 0 18px var(--gold), inset 2px 2px 5px rgba(255,255,255,0.5);
     width: 25px;
     height: 25px;
     z-index: 100;
-    animation: goldPulseSmooth 1.2s ease-in-out infinite;
+    animation: goldPulseUltraSmooth 1.8s ease-in-out infinite;
 }
 
-@keyframes goldPulseSmooth {
+@keyframes goldPulseUltraSmooth {
     0%, 100% { 
         transform: scale(1); 
         box-shadow: 
-            0 0 20px var(--gold),
-            0 0 30px rgba(255, 215, 0, 0.4),
+            0 0 18px var(--gold),
+            0 0 25px rgba(255, 215, 0, 0.35),
             inset 2px 2px 5px rgba(255,255,255,0.5);
     }
     50% { 
-        transform: scale(1.12); 
+        transform: scale(1.1); 
         box-shadow: 
-            0 0 25px var(--gold), 
-            0 0 40px rgba(255, 215, 0, 0.5),
+            0 0 22px var(--gold), 
+            0 0 32px rgba(255, 215, 0, 0.45),
             inset 2px 2px 6px rgba(255,255,255,0.6);
     }
 }
@@ -98,101 +99,101 @@
     .tombola-container { width: 250px; height: 250px; }
 }
 
-/* Efecto de estela suave para bolitas en movimiento */
+/* Efecto de estela ultra suave para bolitas en movimiento */
 .ball.moving::after {
     content: '';
     position: absolute;
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(90, 122, 153, 0.4), transparent);
+    background: radial-gradient(circle, rgba(90, 122, 153, 0.3), transparent);
     top: 0;
     left: 0;
-    animation: trailSmooth 0.8s ease-out infinite;
+    animation: trailUltraSmooth 1.2s ease-out infinite;
     pointer-events: none;
 }
 
-@keyframes trailSmooth {
+@keyframes trailUltraSmooth {
     0% {
         transform: scale(1);
-        opacity: 0.6;
+        opacity: 0.5;
     }
     100% {
-        transform: scale(2);
+        transform: scale(1.8);
         opacity: 0;
     }
 }
 
-/* Efecto de partículas suaves para la bola dorada */
+/* Efecto de partículas ultra suaves para la bola dorada */
 .ball.gold::before {
     content: '';
     position: absolute;
-    width: 140%;
-    height: 140%;
+    width: 130%;
+    height: 130%;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 215, 0, 0.2), transparent 70%);
-    top: -20%;
-    left: -20%;
-    animation: particlesSmooth 1.5s ease-out infinite;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.15), transparent 70%);
+    top: -15%;
+    left: -15%;
+    animation: particlesUltraSmooth 2s ease-out infinite;
     pointer-events: none;
 }
 
-@keyframes particlesSmooth {
+@keyframes particlesUltraSmooth {
     0% {
-        transform: scale(0.9) rotate(0deg);
-        opacity: 0.8;
+        transform: scale(0.95) rotate(0deg);
+        opacity: 0.7;
     }
     100% {
-        transform: scale(1.6) rotate(180deg);
+        transform: scale(1.5) rotate(120deg);
         opacity: 0;
     }
 }
 
-/* Onda de impacto suave */
+/* Onda de impacto ultra suave */
 .shockwave {
     position: absolute;
-    width: 40px;
-    height: 40px;
-    border: 2px solid rgba(255, 183, 3, 0.5);
+    width: 50px;
+    height: 50px;
+    border: 1.5px solid rgba(255, 183, 3, 0.4);
     border-radius: 50%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    animation: shockwaveSmooth 1.2s ease-out;
+    animation: shockwaveUltraSmooth 1.5s ease-out;
     pointer-events: none;
     z-index: 50;
 }
 
-@keyframes shockwaveSmooth {
+@keyframes shockwaveUltraSmooth {
     0% {
-        width: 40px;
-        height: 40px;
-        opacity: 0.8;
-        border-width: 2px;
+        width: 50px;
+        height: 50px;
+        opacity: 0.7;
+        border-width: 1.5px;
     }
-    70% {
-        opacity: 0.3;
-        border-width: 1px;
+    80% {
+        opacity: 0.2;
+        border-width: 0.8px;
     }
     100% {
-        width: 280px;
-        height: 280px;
+        width: 260px;
+        height: 260px;
         opacity: 0;
-        border-width: 0.5px;
+        border-width: 0.3px;
     }
 }
 
-/* Bola ganadora con efecto suave */
+/* Bola ganadora con efecto ultra suave */
 .ball.winner-ball {
-    animation: winnerGlow 1s ease-in-out infinite;
-    z-index: 120 !important;
+    animation: winnerGlowSmooth 1.5s ease-in-out infinite;
+    z-index: 110 !important;
 }
 
-@keyframes winnerGlow {
+@keyframes winnerGlowSmooth {
     0%, 100% {
-        filter: brightness(1.3) saturate(1.4);
+        filter: brightness(1.2) saturate(1.3);
     }
     50% {
-        filter: brightness(1.6) saturate(1.7);
+        filter: brightness(1.4) saturate(1.5);
     }
 }

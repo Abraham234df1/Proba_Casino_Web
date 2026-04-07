@@ -28,66 +28,55 @@ function initTombola() {
     }
 }
 
-// Función para mover las bolas individualmente con efectos naturales y suaves
+// Función para mover las bolas individualmente con máxima suavidad
 function shuffleBalls() {
     const balls = document.querySelectorAll('.ball');
     
     balls.forEach((ball, index) => {
-        // Delay escalonado suave
+        // Delay más espaciado para movimiento más suave
         setTimeout(() => {
-            // Generar movimiento suave en 2 fases
-            const angle1 = Math.random() * Math.PI * 2;
-            const dist1 = Math.random() * 90 + 40;
-            const midX = Math.cos(angle1) * dist1;
-            const midY = Math.sin(angle1) * dist1;
+            // Movimiento suave en una sola fase fluida
+            const angle = Math.random() * Math.PI * 2;
+            const dist = Math.random() * 95 + 35;
+            const finalX = Math.cos(angle) * dist;
+            const finalY = Math.sin(angle) * dist;
             
-            // Posición final
-            const angle2 = Math.random() * Math.PI * 2;
-            const dist2 = Math.random() * 100 + 35;
-            const finalX = Math.cos(angle2) * dist2;
-            const finalY = Math.sin(angle2) * dist2;
-            
-            // Rotación suave
-            const rotation = Math.random() * 180 - 90; // Entre -90 y 90 grados
+            // Rotación muy sutil
+            const rotation = Math.random() * 60 - 30; // Entre -30 y 30 grados
             
             // Añadir clase de movimiento
             ball.classList.add('moving');
             
-            // Primera fase - movimiento suave
-            ball.style.transition = 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-            ball.style.left = `calc(50% + ${midX}px - 10px)`;
-            ball.style.top = `calc(50% + ${midY}px - 10px)`;
-            ball.style.transform = `scale(1.15) rotate(${rotation * 0.5}deg)`;
+            // Movimiento ultra suave y lento
+            ball.style.transition = 'all 1.2s cubic-bezier(0.23, 1, 0.32, 1)';
+            ball.style.left = `calc(50% + ${finalX}px - 10px)`;
+            ball.style.top = `calc(50% + ${finalY}px - 10px)`;
+            ball.style.transform = `scale(1.08) rotate(${rotation}deg)`;
             
-            // Segunda fase - posición final suave
+            // Asentamiento ultra suave
             setTimeout(() => {
-                ball.style.transition = 'all 0.7s cubic-bezier(0.34, 1.2, 0.64, 1)';
-                ball.style.left = `calc(50% + ${finalX}px - 10px)`;
-                ball.style.top = `calc(50% + ${finalY}px - 10px)`;
-                ball.style.transform = `scale(1) rotate(${rotation}deg)`;
+                ball.style.transition = 'all 0.8s cubic-bezier(0.23, 1, 0.32, 1)';
+                ball.style.transform = 'scale(1) rotate(0deg)';
                 
-                // Asentamiento final
                 setTimeout(() => {
-                    ball.style.transition = 'all 0.4s ease-out';
-                    ball.style.transform = 'scale(1) rotate(0deg)';
                     ball.classList.remove('moving');
-                }, 700);
-            }, 600);
+                }, 800);
+            }, 1200);
             
-        }, index * 45); // Delay suave entre bolas
+        }, index * 60); // Delay más largo entre bolas para efecto más fluido
     });
 }
 
-// Función para añadir efecto de vibración suave a la tómbola
+// Función para añadir efecto de vibración muy suave a la tómbola
 function vibrateContainer() {
     const container = document.querySelector('.tombola-container');
     container.classList.add('shaking');
     setTimeout(() => {
         container.classList.remove('shaking');
-    }, 1500);
+    }, 1600);
 }
 
-// Función para crear onda suave de impacto
+// Función para crear onda ultra suave de impacto
 function createShockwave() {
     const container = document.querySelector('.tombola');
     const wave = document.createElement('div');
@@ -96,7 +85,7 @@ function createShockwave() {
     
     setTimeout(() => {
         wave.remove();
-    }, 1200);
+    }, 1500);
 }
 
 function updateStats() {
@@ -120,17 +109,17 @@ async function attempt(isAuto = false) {
         spin1Btn.disabled = true;
         msgBox.innerText = "¡Girando la tómbola!";
         
-        // Efecto de vibración suave del contenedor
+        // Efecto de vibración ultra suave del contenedor
         vibrateContainer();
         
-        // Crear onda de impacto sutil
+        // Crear onda de impacto ultra sutil
         createShockwave();
         
-        // Mover las bolas suavemente
+        // Mover las bolas con máxima suavidad
         shuffleBalls();
         
-        // Esperar a que terminen de moverse (2 fases suaves)
-        await new Promise(resolve => setTimeout(resolve, 1900));
+        // Esperar más tiempo para ver el movimiento completo y suave
+        await new Promise(resolve => setTimeout(resolve, 2600));
     }
 
     attempts++;
@@ -140,21 +129,21 @@ async function attempt(isAuto = false) {
         wins++;
         if (!isAuto) {
             msgBox.innerHTML = "<span class='success'>¡ENCONTRASTE LA BOLA DORADA!</span> La suerte te sonrió esta vez.";
-            // Efecto visual suave de bola dorada
+            // Efecto visual ultra suave de bola dorada
             const balls = document.querySelectorAll('.ball');
             const luckyIdx = Math.floor(Math.random() * balls.length);
             
-            // Añadir clases con efectos suaves
+            // Añadir clases con efectos ultra suaves
             balls[luckyIdx].classList.add('gold');
             balls[luckyIdx].classList.add('winner-ball');
             
-            // Onda de victoria suave
-            setTimeout(() => createShockwave(), 200);
+            // Onda de victoria ultra suave
+            setTimeout(() => createShockwave(), 300);
             
             setTimeout(() => {
                 balls[luckyIdx].classList.remove('winner-ball');
-            }, 2000);
-            setTimeout(() => balls[luckyIdx].classList.remove('gold'), 4000);
+            }, 2500);
+            setTimeout(() => balls[luckyIdx].classList.remove('gold'), 5000);
         }
     } else if (!isAuto) {
         msgBox.innerHTML = "Solo salieron bolas azules. Inténtalo de nuevo.";
